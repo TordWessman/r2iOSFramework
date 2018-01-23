@@ -9,7 +9,7 @@
 import Foundation
 
 /** Represents a remote web socket server. */
-class WebSocketServerModel: JSONRequest, JSONInitializable {
+public class WebSocketServerModel: JSONRequest, JSONInitializable {
     
     private(set) public var id: String
     private(set) public var ip: String?
@@ -19,7 +19,7 @@ class WebSocketServerModel: JSONRequest, JSONInitializable {
     
     private(set) public var url: String
     
-    required init? (json: InputStream.JsonDictionaryType?) {
+    required public init? (json: InputStream.JsonDictionaryType?) {
     
         if let object = json!.json(key: DeviceModel.Object), let id: String = object.parse(key: DeviceModel.Identifier) {
             
@@ -36,7 +36,7 @@ class WebSocketServerModel: JSONRequest, JSONInitializable {
 
     }
     
-    init(id: String, endpoint: String, token: String? = nil) {
+    public init(id: String, endpoint: String, token: String? = nil) {
         self.id = id
         self.url = endpoint
         m_token = token

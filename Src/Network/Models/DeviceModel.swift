@@ -70,20 +70,20 @@ public final class DeviceModel: JSONObjectRequest {
     private(set) public var object: [String:AnyObject]?
     
     // Type of action (i.e Get, Invoke, Set)
-    static let ActionType = "ActionType"
+    public static let ActionType = "ActionType"
     // Name of the method/property to invoke
-    static let Action = "Action"
+    public static let Action = "Action"
     // The response of an Action
-    static let ActionResponse = "ActionResponse"
+    public static let ActionResponse = "ActionResponse"
     // Identifier of the object to invoke
-    static let Identifier = "Identifier"
+    public static let Identifier = "Identifier"
     // Parameters used by invocation
-    static let Params = "Params"
+    public static let Params = "Params"
     // Property containing the target object
-    static let Object = "Object"
+    public static let Object = "Object"
     
     // IDevice property.
-    static let Ready = "Ready"
+    public static let Ready = "Ready"
     
     public init (id: String, type: ActionType? = nil, endpoint: String) {
     
@@ -111,9 +111,10 @@ public final class DeviceModel: JSONObjectRequest {
 
 public class JSONObjectRequest: JSONRequest {
     
+    public var type: ActionType?
+    public var action: String?
+    
     private var m_id: String
-    var type: ActionType?
-    var action: String?
     private var m_params: [Param]
     private var m_endpoint: String?
     

@@ -8,9 +8,9 @@
 
 import Foundation
 
-class Log {
+public class Log {
     
-    class func d(_ what: Any?) {
+    public class func d(_ what: Any?) {
         if let v = what {
             print(v);
         } else {

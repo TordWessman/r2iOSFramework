@@ -30,12 +30,9 @@
 		77F520002015C49500BD9678 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FE62015C49500BD9678 /* Array+Extensions.swift */; };
 		77F520012015C49500BD9678 /* NSDate+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FE72015C49500BD9678 /* NSDate+Extensions.swift */; };
 		77F520022015C49500BD9678 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FE82015C49500BD9678 /* UIView+Extensions.swift */; };
-		77F520032015C49500BD9678 /* NSData+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FE92015C49500BD9678 /* NSData+Extensions.swift */; };
 		77F520042015C49500BD9678 /* Conversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FEA2015C49500BD9678 /* Conversions.swift */; };
-		77F520052015C49500BD9678 /* GardenController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FEB2015C49500BD9678 /* GardenController+Extensions.swift */; };
 		77F520062015C49500BD9678 /* Dictionary+Json.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FEC2015C49500BD9678 /* Dictionary+Json.swift */; };
 		77F520072015C49500BD9678 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FED2015C49500BD9678 /* String.swift */; };
-		77F520082015C49500BD9678 /* Numbers+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FEE2015C49500BD9678 /* Numbers+Extensions.swift */; };
 		77F5200A2015C4EB00BD9678 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F520092015C4EB00BD9678 /* Log.swift */; };
 		77F520142015C5F300BD9678 /* TCPMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F520112015C5F300BD9678 /* TCPMessage.swift */; };
 		77F520152015C5F300BD9678 /* PackageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F520122015C5F300BD9678 /* PackageFactory.swift */; };
@@ -94,12 +91,9 @@
 		77F51FE62015C49500BD9678 /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		77F51FE72015C49500BD9678 /* NSDate+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Extensions.swift"; sourceTree = "<group>"; };
 		77F51FE82015C49500BD9678 /* UIView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
-		77F51FE92015C49500BD9678 /* NSData+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSData+Extensions.swift"; sourceTree = "<group>"; };
 		77F51FEA2015C49500BD9678 /* Conversions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversions.swift; sourceTree = "<group>"; };
-		77F51FEB2015C49500BD9678 /* GardenController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GardenController+Extensions.swift"; sourceTree = "<group>"; };
 		77F51FEC2015C49500BD9678 /* Dictionary+Json.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Json.swift"; sourceTree = "<group>"; };
 		77F51FED2015C49500BD9678 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		77F51FEE2015C49500BD9678 /* Numbers+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Numbers+Extensions.swift"; sourceTree = "<group>"; };
 		77F520092015C4EB00BD9678 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		77F520112015C5F300BD9678 /* TCPMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCPMessage.swift; sourceTree = "<group>"; };
 		77F520122015C5F300BD9678 /* PackageFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackageFactory.swift; sourceTree = "<group>"; };
@@ -259,12 +253,9 @@
 				77F51FE62015C49500BD9678 /* Array+Extensions.swift */,
 				77F51FE72015C49500BD9678 /* NSDate+Extensions.swift */,
 				77F51FE82015C49500BD9678 /* UIView+Extensions.swift */,
-				77F51FE92015C49500BD9678 /* NSData+Extensions.swift */,
 				77F51FEA2015C49500BD9678 /* Conversions.swift */,
-				77F51FEB2015C49500BD9678 /* GardenController+Extensions.swift */,
 				77F51FEC2015C49500BD9678 /* Dictionary+Json.swift */,
 				77F51FED2015C49500BD9678 /* String.swift */,
-				77F51FEE2015C49500BD9678 /* Numbers+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -417,8 +408,6 @@
 				77F520022015C49500BD9678 /* UIView+Extensions.swift in Sources */,
 				77F520192015C65900BD9678 /* UDPBroadcastConnection.swift in Sources */,
 				77F51FFF2015C49500BD9678 /* ISocketSession.swift in Sources */,
-				77F520082015C49500BD9678 /* Numbers+Extensions.swift in Sources */,
-				77F520052015C49500BD9678 /* GardenController+Extensions.swift in Sources */,
 				77F51FF32015C49500BD9678 /* DeviceBase.swift in Sources */,
 				77F51FF22015C49500BD9678 /* WebSocketSession.swift in Sources */,
 				77F520202015C75600BD9678 /* AnalogDevice.swift in Sources */,
@@ -432,7 +421,6 @@
 				77F5202C2015C78200BD9678 /* RemoteLog.swift in Sources */,
 				77F51FFB2015C49500BD9678 /* ModelOperation.swift in Sources */,
 				77F520042015C49500BD9678 /* Conversions.swift in Sources */,
-				77F520032015C49500BD9678 /* NSData+Extensions.swift in Sources */,
 				77F520282015C78200BD9678 /* RemoteMemory.swift in Sources */,
 				77F520292015C78200BD9678 /* Voice.swift in Sources */,
 				77F5202D2015C78200BD9678 /* MusicPlayer.swift in Sources */,
@@ -594,6 +582,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = r2Project/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = se.axelit.r2Project;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -614,6 +603,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = r2Project/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = se.axelit.r2Project;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";

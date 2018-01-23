@@ -24,22 +24,23 @@ public protocol EnumType {
 *   Contains extension methods for a (Json) Dictionary.
 *   Methods must always return a value of the expected type.
 */
-extension Dictionary {
+public extension Dictionary {
 
     /**
      *     Tries to parse the value as an URL
      */
-    func url(key: String) -> URL? {
+    public func url(key: String) -> URL? {
         
         if let value: String = parse(key: key) { return URL(string: value) }
         
         return nil
+        
     }
  
     /**
     *   Return an object conforming to protocol EnumType.String (preferably an enumeration)
     */
-    func enumeration<T: EnumType>(key: String) -> T? {
+    public func enumeration<T: EnumType>(key: String) -> T? {
         
         if  let value: T.E = parse(key: key),
             let enumeration: T = T(rawValue: value as T.E) {
@@ -55,9 +56,8 @@ extension Dictionary {
     /**
     *   Return an array of type T (Int, String, Bool, Dictionary etc)
     */
-    func array<T>(key: String) ->Array<T>? {
-        
-        
+    public func array<T>(key: String) ->Array<T>? {
+
         if let value: Array<T> = parse(key: key) { return value }
         
         return nil
@@ -67,7 +67,7 @@ extension Dictionary {
     /**
     *       Returns a JSON Dictionary
     */
-    func json(key: String) ->Dictionary<String,AnyObject>? {
+    public func json(key: String) ->Dictionary<String,AnyObject>? {
 
         if let value: Dictionary<String,AnyObject> = parse(key: key) { return value }
         
@@ -78,17 +78,15 @@ extension Dictionary {
     /**
     *   Populatas an array of the given type, T, where T must implement the JSONInitializable protocol.
     */
-    func models<T:JSONInitializable>(key: String) -> Array<T>? {
+    public func models<T:JSONInitializable>(key: String) -> Array<T>? {
         
-        let value = self[key as! Key]
+        guard let k = key as? Key else { assertionFailure("\(key) was not of type Key. "); return nil }
+        
+        let value = self[k]
         
         var returnArray: Array<T> = Array<T>()
         
-        if (isNull(value: value)) {
-            
-            return nil
-        
-        }
+        if (isNull(value: value)) { return nil }
         
         if let arrayDictionary = value as? Array<[String:AnyObject]> {
      
@@ -117,19 +115,20 @@ extension Dictionary {
     /**
     *   Returns an optional T, where T must implement the JSONInitializable protocol.
     */
-    func model<T:JSONInitializable>(key: String) -> T? {
+    public func model<T:JSONInitializable>(key: String) -> T? {
         
-        let value = self[key as! Key]
+        guard let k = key as? Key else { assertionFailure("\(key) was not of type Key. "); return nil }
         
-        if (isNull(value: value)) {
+        let value = self[k]
+        
+        if isNull(value: value) {
             return nil
         }
         
-        if (value is [String: AnyObject]) {
-            return T(json: (value as! [String: AnyObject]))
-        }
+        if let dictionary = value as? [String: AnyObject] { return T(json: dictionary) }
         
         return nil
+        
     }
 
     
@@ -141,7 +140,9 @@ extension Dictionary {
     
     public func parse<T>(key: String) -> T? {
         
-        if let val = self[key as! Key], !isNull(value: val)  {
+        guard let k = key as? Key else { assertionFailure("\(key) was not of type Key. "); return nil }
+        
+        if let val = self[k], !isNull(value: val)  {
 
             return val as? T
             

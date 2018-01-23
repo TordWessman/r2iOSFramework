@@ -13,7 +13,7 @@ public class DeviceBase: IDevice {
     
     public typealias DEVICE_CHANGED = (IDevice) -> ()
     
-    static let Value = "Value"
+    public static let Value = "Value"
     
     private(set) public var id: String
     private(set) var deviceRouter: IDeviceRouter?

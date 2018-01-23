@@ -8,8 +8,9 @@
 
 import Foundation
 
-extension Data {
+internal extension Data {
     
+    // Instantiate Data using an InputStream
     init(reading input: InputStream) {
 
         self.init()
@@ -18,16 +19,19 @@ extension Data {
         let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)
         
         while input.hasBytesAvailable {
+            
             let read = input.read(buffer, maxLength: bufferSize)
             self.append(buffer, count: read)
+        
         }
         
         buffer.deallocate(capacity: bufferSize)
         
     }
+    
 }
 
-public class TcpClient: NSObject, StreamDelegate {
+internal class TcpClient: NSObject, StreamDelegate {
     
     public typealias ReceiveDelegateType = ((_ data: Data?, _ error: Error?)->())
     typealias InputStreamType = Unmanaged<CFReadStream>

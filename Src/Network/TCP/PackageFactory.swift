@@ -16,7 +16,7 @@ enum NetworkError : Error {
     
 }
 
-extension InputStream {
+public extension InputStream {
     
     public typealias JsonDictionaryType = [String: Any]
     public typealias JsonDictonaryResponseType = ((InputStream.JsonDictionaryType?, Error?) -> ())
@@ -24,9 +24,13 @@ extension InputStream {
     // Reads size bytes and deserializes inte a json object
     func json (_ size: Int) throws -> JsonDictionaryType {
     
-        let dd = try JSONSerialization.jsonObject(with: read(size), options: JSONSerialization.ReadingOptions.mutableContainers)
+        guard let dd = try JSONSerialization.jsonObject(with: read(size), options: JSONSerialization.ReadingOptions.mutableContainers) as? JsonDictionaryType else {
+            
+            throw NetworkError.SerializationError("Object not of type 'JsonDictionaryType'.")
+            
+        }
         
-         return dd as! JsonDictionaryType
+         return dd
     
     }
     
@@ -48,6 +52,7 @@ extension InputStream {
             throw NetworkError.SerializationError("Stream reading error. Expected \(count) bytes. Got \(bytesRead).")
             
         }
+        
         let d = Data(bytes: buffer, count: count)
         
         let s = String(bytes: d, encoding: String.Encoding.utf8)
@@ -74,7 +79,7 @@ extension InputStream {
     
 }
 
-extension Data {
+internal extension Data {
 
     // Transforms the value of type T into a raw byte array
     static func serialize<T>(_ value: T, _ count: Int? = nil) -> [UInt8] {
@@ -96,7 +101,7 @@ extension Data {
     
 }
 
-class PackageFactory {
+internal class PackageFactory {
     
     // This is a constant value defined by the backend, informing that dynamic types (serialized object) is sent to the backend
     private let dynamicType: Int16 = 1

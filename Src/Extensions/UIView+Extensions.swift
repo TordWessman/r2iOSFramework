@@ -10,8 +10,7 @@ import UIKit
 
 public extension UIView {
     
-    
-    func xibSetup(nibName: String? = nil) {
+    public func xibSetup(nibName: String? = nil) {
         
         let name = nibName ?? String(describing: type(of: self))
         
@@ -23,7 +22,7 @@ public extension UIView {
         addSubview(view)
     }
     
-    func loadViewFromNib(nibName: String) -> UIView {
+    public func loadViewFromNib(nibName: String) -> UIView {
         
         let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: nibName, bundle: bundle)

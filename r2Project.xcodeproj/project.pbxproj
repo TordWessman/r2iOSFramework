@@ -10,6 +10,51 @@
 		77F51FBE2015C3A900BD9678 /* r2Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F51FB42015C3A900BD9678 /* r2Project.framework */; };
 		77F51FC32015C3A900BD9678 /* r2ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FC22015C3A900BD9678 /* r2ProjectTests.swift */; };
 		77F51FC52015C3A900BD9678 /* r2Project.h in Headers */ = {isa = PBXBuildFile; fileRef = 77F51FB72015C3A900BD9678 /* r2Project.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		77F51FEF2015C49500BD9678 /* IDeviceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FD02015C49500BD9678 /* IDeviceRouter.swift */; };
+		77F51FF02015C49500BD9678 /* WebSocketModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FD22015C49500BD9678 /* WebSocketModel.swift */; };
+		77F51FF12015C49500BD9678 /* DeviceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FD32015C49500BD9678 /* DeviceRouter.swift */; };
+		77F51FF22015C49500BD9678 /* WebSocketSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FD42015C49500BD9678 /* WebSocketSession.swift */; };
+		77F51FF32015C49500BD9678 /* DeviceBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FD62015C49500BD9678 /* DeviceBase.swift */; };
+		77F51FF42015C49500BD9678 /* IDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FD72015C49500BD9678 /* IDevice.swift */; };
+		77F51FF52015C49500BD9678 /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FD82015C49500BD9678 /* DeviceModel.swift */; };
+		77F51FF62015C49500BD9678 /* TcpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FDA2015C49500BD9678 /* TcpClient.swift */; };
+		77F51FF72015C49500BD9678 /* TCPSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FDB2015C49500BD9678 /* TCPSession.swift */; };
+		77F51FF82015C49500BD9678 /* IModelFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FDD2015C49500BD9678 /* IModelFacade.swift */; };
+		77F51FF92015C49500BD9678 /* Encoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FDE2015C49500BD9678 /* Encoding.swift */; };
+		77F51FFA2015C49500BD9678 /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FDF2015C49500BD9678 /* HttpRequest.swift */; };
+		77F51FFB2015C49500BD9678 /* ModelOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FE02015C49500BD9678 /* ModelOperation.swift */; };
+		77F51FFC2015C49500BD9678 /* ModelFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FE12015C49500BD9678 /* ModelFacade.swift */; };
+		77F51FFD2015C49500BD9678 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FE22015C49500BD9678 /* BaseModel.swift */; };
+		77F51FFE2015C49500BD9678 /* DeviceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FE32015C49500BD9678 /* DeviceFactory.swift */; };
+		77F51FFF2015C49500BD9678 /* ISocketSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FE42015C49500BD9678 /* ISocketSession.swift */; };
+		77F520002015C49500BD9678 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FE62015C49500BD9678 /* Array+Extensions.swift */; };
+		77F520012015C49500BD9678 /* NSDate+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FE72015C49500BD9678 /* NSDate+Extensions.swift */; };
+		77F520022015C49500BD9678 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FE82015C49500BD9678 /* UIView+Extensions.swift */; };
+		77F520032015C49500BD9678 /* NSData+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FE92015C49500BD9678 /* NSData+Extensions.swift */; };
+		77F520042015C49500BD9678 /* Conversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FEA2015C49500BD9678 /* Conversions.swift */; };
+		77F520052015C49500BD9678 /* GardenController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FEB2015C49500BD9678 /* GardenController+Extensions.swift */; };
+		77F520062015C49500BD9678 /* Dictionary+Json.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FEC2015C49500BD9678 /* Dictionary+Json.swift */; };
+		77F520072015C49500BD9678 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FED2015C49500BD9678 /* String.swift */; };
+		77F520082015C49500BD9678 /* Numbers+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FEE2015C49500BD9678 /* Numbers+Extensions.swift */; };
+		77F5200A2015C4EB00BD9678 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F520092015C4EB00BD9678 /* Log.swift */; };
+		77F520142015C5F300BD9678 /* TCPMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F520112015C5F300BD9678 /* TCPMessage.swift */; };
+		77F520152015C5F300BD9678 /* PackageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F520122015C5F300BD9678 /* PackageFactory.swift */; };
+		77F520162015C5F300BD9678 /* UDPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F520132015C5F300BD9678 /* UDPClient.swift */; };
+		77F520192015C65900BD9678 /* UDPBroadcastConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F520182015C65900BD9678 /* UDPBroadcastConnection.swift */; };
+		77F5201B2015C6A200BD9678 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F5201A2015C6A200BD9678 /* WebSocket.swift */; };
+		77F520202015C75600BD9678 /* AnalogDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F5201F2015C75500BD9678 /* AnalogDevice.swift */; };
+		77F520282015C78200BD9678 /* RemoteMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F520212015C78100BD9678 /* RemoteMemory.swift */; };
+		77F520292015C78200BD9678 /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F520222015C78100BD9678 /* Voice.swift */; };
+		77F5202A2015C78200BD9678 /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F520232015C78100BD9678 /* Console.swift */; };
+		77F5202B2015C78200BD9678 /* Servo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F520242015C78200BD9678 /* Servo.swift */; };
+		77F5202C2015C78200BD9678 /* RemoteLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F520252015C78200BD9678 /* RemoteLog.swift */; };
+		77F5202D2015C78200BD9678 /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F520262015C78200BD9678 /* MusicPlayer.swift */; };
+		77F5202E2015C78200BD9678 /* ASR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F520272015C78200BD9678 /* ASR.swift */; };
+		77F520302015C86800BD9678 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F5202F2015C86800BD9678 /* libiconv.tbd */; };
+		77F520322015C8AD00BD9678 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F520312015C8AD00BD9678 /* Foundation.framework */; };
+		77F520342015C8B400BD9678 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F520332015C8B400BD9678 /* UIKit.framework */; };
+		77F520362015C91200BD9678 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F520352015C91200BD9678 /* libz.tbd */; };
+		77F520382015C93400BD9678 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F520372015C93400BD9678 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +74,51 @@
 		77F51FBD2015C3A900BD9678 /* r2ProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = r2ProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F51FC22015C3A900BD9678 /* r2ProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = r2ProjectTests.swift; sourceTree = "<group>"; };
 		77F51FC42015C3A900BD9678 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		77F51FD02015C49500BD9678 /* IDeviceRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDeviceRouter.swift; sourceTree = "<group>"; };
+		77F51FD22015C49500BD9678 /* WebSocketModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocketModel.swift; sourceTree = "<group>"; };
+		77F51FD32015C49500BD9678 /* DeviceRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceRouter.swift; sourceTree = "<group>"; };
+		77F51FD42015C49500BD9678 /* WebSocketSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocketSession.swift; sourceTree = "<group>"; };
+		77F51FD62015C49500BD9678 /* DeviceBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceBase.swift; sourceTree = "<group>"; };
+		77F51FD72015C49500BD9678 /* IDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDevice.swift; sourceTree = "<group>"; };
+		77F51FD82015C49500BD9678 /* DeviceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
+		77F51FDA2015C49500BD9678 /* TcpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TcpClient.swift; sourceTree = "<group>"; };
+		77F51FDB2015C49500BD9678 /* TCPSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCPSession.swift; sourceTree = "<group>"; };
+		77F51FDD2015C49500BD9678 /* IModelFacade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IModelFacade.swift; sourceTree = "<group>"; };
+		77F51FDE2015C49500BD9678 /* Encoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Encoding.swift; sourceTree = "<group>"; };
+		77F51FDF2015C49500BD9678 /* HttpRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
+		77F51FE02015C49500BD9678 /* ModelOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelOperation.swift; sourceTree = "<group>"; };
+		77F51FE12015C49500BD9678 /* ModelFacade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelFacade.swift; sourceTree = "<group>"; };
+		77F51FE22015C49500BD9678 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
+		77F51FE32015C49500BD9678 /* DeviceFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceFactory.swift; sourceTree = "<group>"; };
+		77F51FE42015C49500BD9678 /* ISocketSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISocketSession.swift; sourceTree = "<group>"; };
+		77F51FE62015C49500BD9678 /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		77F51FE72015C49500BD9678 /* NSDate+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Extensions.swift"; sourceTree = "<group>"; };
+		77F51FE82015C49500BD9678 /* UIView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		77F51FE92015C49500BD9678 /* NSData+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSData+Extensions.swift"; sourceTree = "<group>"; };
+		77F51FEA2015C49500BD9678 /* Conversions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversions.swift; sourceTree = "<group>"; };
+		77F51FEB2015C49500BD9678 /* GardenController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GardenController+Extensions.swift"; sourceTree = "<group>"; };
+		77F51FEC2015C49500BD9678 /* Dictionary+Json.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Json.swift"; sourceTree = "<group>"; };
+		77F51FED2015C49500BD9678 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		77F51FEE2015C49500BD9678 /* Numbers+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Numbers+Extensions.swift"; sourceTree = "<group>"; };
+		77F520092015C4EB00BD9678 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		77F520112015C5F300BD9678 /* TCPMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCPMessage.swift; sourceTree = "<group>"; };
+		77F520122015C5F300BD9678 /* PackageFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackageFactory.swift; sourceTree = "<group>"; };
+		77F520132015C5F300BD9678 /* UDPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDPClient.swift; sourceTree = "<group>"; };
+		77F520182015C65900BD9678 /* UDPBroadcastConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDPBroadcastConnection.swift; sourceTree = "<group>"; };
+		77F5201A2015C6A200BD9678 /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
+		77F5201F2015C75500BD9678 /* AnalogDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalogDevice.swift; sourceTree = "<group>"; };
+		77F520212015C78100BD9678 /* RemoteMemory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteMemory.swift; sourceTree = "<group>"; };
+		77F520222015C78100BD9678 /* Voice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
+		77F520232015C78100BD9678 /* Console.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
+		77F520242015C78200BD9678 /* Servo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Servo.swift; sourceTree = "<group>"; };
+		77F520252015C78200BD9678 /* RemoteLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteLog.swift; sourceTree = "<group>"; };
+		77F520262015C78200BD9678 /* MusicPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
+		77F520272015C78200BD9678 /* ASR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASR.swift; sourceTree = "<group>"; };
+		77F5202F2015C86800BD9678 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		77F520312015C8AD00BD9678 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		77F520332015C8B400BD9678 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		77F520352015C91200BD9678 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		77F520372015C93400BD9678 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +126,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77F520382015C93400BD9678 /* QuartzCore.framework in Frameworks */,
+				77F520362015C91200BD9678 /* libz.tbd in Frameworks */,
+				77F520342015C8B400BD9678 /* UIKit.framework in Frameworks */,
+				77F520322015C8AD00BD9678 /* Foundation.framework in Frameworks */,
+				77F520302015C86800BD9678 /* libiconv.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +148,8 @@
 		77F51FAA2015C3A900BD9678 = {
 			isa = PBXGroup;
 			children = (
+				77F520172015C63600BD9678 /* Frameworks */,
+				77F51FCE2015C43000BD9678 /* Src */,
 				77F51FB62015C3A900BD9678 /* r2Project */,
 				77F51FC12015C3A900BD9678 /* r2ProjectTests */,
 				77F51FB52015C3A900BD9678 /* Products */,
@@ -84,6 +181,121 @@
 				77F51FC42015C3A900BD9678 /* Info.plist */,
 			);
 			path = r2ProjectTests;
+			sourceTree = "<group>";
+		};
+		77F51FCE2015C43000BD9678 /* Src */ = {
+			isa = PBXGroup;
+			children = (
+				77F5201C2015C6E500BD9678 /* Devices */,
+				77F520092015C4EB00BD9678 /* Log.swift */,
+				77F51FE52015C49500BD9678 /* Extensions */,
+				77F51FCF2015C49500BD9678 /* Network */,
+			);
+			path = Src;
+			sourceTree = "<group>";
+		};
+		77F51FCF2015C49500BD9678 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				77F51FD02015C49500BD9678 /* IDeviceRouter.swift */,
+				77F51FD12015C49500BD9678 /* Websockets */,
+				77F51FD52015C49500BD9678 /* Models */,
+				77F51FD92015C49500BD9678 /* TCP */,
+				77F51FDC2015C49500BD9678 /* Http */,
+				77F51FE32015C49500BD9678 /* DeviceFactory.swift */,
+				77F51FE42015C49500BD9678 /* ISocketSession.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		77F51FD12015C49500BD9678 /* Websockets */ = {
+			isa = PBXGroup;
+			children = (
+				77F51FD22015C49500BD9678 /* WebSocketModel.swift */,
+				77F51FD32015C49500BD9678 /* DeviceRouter.swift */,
+				77F51FD42015C49500BD9678 /* WebSocketSession.swift */,
+			);
+			path = Websockets;
+			sourceTree = "<group>";
+		};
+		77F51FD52015C49500BD9678 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				77F51FD62015C49500BD9678 /* DeviceBase.swift */,
+				77F51FD72015C49500BD9678 /* IDevice.swift */,
+				77F51FD82015C49500BD9678 /* DeviceModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		77F51FD92015C49500BD9678 /* TCP */ = {
+			isa = PBXGroup;
+			children = (
+				77F520122015C5F300BD9678 /* PackageFactory.swift */,
+				77F520112015C5F300BD9678 /* TCPMessage.swift */,
+				77F520132015C5F300BD9678 /* UDPClient.swift */,
+				77F51FDA2015C49500BD9678 /* TcpClient.swift */,
+				77F51FDB2015C49500BD9678 /* TCPSession.swift */,
+			);
+			path = TCP;
+			sourceTree = "<group>";
+		};
+		77F51FDC2015C49500BD9678 /* Http */ = {
+			isa = PBXGroup;
+			children = (
+				77F51FDD2015C49500BD9678 /* IModelFacade.swift */,
+				77F51FDE2015C49500BD9678 /* Encoding.swift */,
+				77F51FDF2015C49500BD9678 /* HttpRequest.swift */,
+				77F51FE02015C49500BD9678 /* ModelOperation.swift */,
+				77F51FE12015C49500BD9678 /* ModelFacade.swift */,
+				77F51FE22015C49500BD9678 /* BaseModel.swift */,
+			);
+			path = Http;
+			sourceTree = "<group>";
+		};
+		77F51FE52015C49500BD9678 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				77F51FE62015C49500BD9678 /* Array+Extensions.swift */,
+				77F51FE72015C49500BD9678 /* NSDate+Extensions.swift */,
+				77F51FE82015C49500BD9678 /* UIView+Extensions.swift */,
+				77F51FE92015C49500BD9678 /* NSData+Extensions.swift */,
+				77F51FEA2015C49500BD9678 /* Conversions.swift */,
+				77F51FEB2015C49500BD9678 /* GardenController+Extensions.swift */,
+				77F51FEC2015C49500BD9678 /* Dictionary+Json.swift */,
+				77F51FED2015C49500BD9678 /* String.swift */,
+				77F51FEE2015C49500BD9678 /* Numbers+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		77F520172015C63600BD9678 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				77F520372015C93400BD9678 /* QuartzCore.framework */,
+				77F520352015C91200BD9678 /* libz.tbd */,
+				77F520332015C8B400BD9678 /* UIKit.framework */,
+				77F520312015C8AD00BD9678 /* Foundation.framework */,
+				77F5202F2015C86800BD9678 /* libiconv.tbd */,
+				77F5201A2015C6A200BD9678 /* WebSocket.swift */,
+				77F520182015C65900BD9678 /* UDPBroadcastConnection.swift */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		77F5201C2015C6E500BD9678 /* Devices */ = {
+			isa = PBXGroup;
+			children = (
+				77F520272015C78200BD9678 /* ASR.swift */,
+				77F520232015C78100BD9678 /* Console.swift */,
+				77F520262015C78200BD9678 /* MusicPlayer.swift */,
+				77F520252015C78200BD9678 /* RemoteLog.swift */,
+				77F520212015C78100BD9678 /* RemoteMemory.swift */,
+				77F520242015C78200BD9678 /* Servo.swift */,
+				77F520222015C78100BD9678 /* Voice.swift */,
+				77F5201F2015C75500BD9678 /* AnalogDevice.swift */,
+			);
+			path = Devices;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,6 +408,46 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77F520162015C5F300BD9678 /* UDPClient.swift in Sources */,
+				77F51FF62015C49500BD9678 /* TcpClient.swift in Sources */,
+				77F5202B2015C78200BD9678 /* Servo.swift in Sources */,
+				77F520002015C49500BD9678 /* Array+Extensions.swift in Sources */,
+				77F5200A2015C4EB00BD9678 /* Log.swift in Sources */,
+				77F520142015C5F300BD9678 /* TCPMessage.swift in Sources */,
+				77F520022015C49500BD9678 /* UIView+Extensions.swift in Sources */,
+				77F520192015C65900BD9678 /* UDPBroadcastConnection.swift in Sources */,
+				77F51FFF2015C49500BD9678 /* ISocketSession.swift in Sources */,
+				77F520082015C49500BD9678 /* Numbers+Extensions.swift in Sources */,
+				77F520052015C49500BD9678 /* GardenController+Extensions.swift in Sources */,
+				77F51FF32015C49500BD9678 /* DeviceBase.swift in Sources */,
+				77F51FF22015C49500BD9678 /* WebSocketSession.swift in Sources */,
+				77F520202015C75600BD9678 /* AnalogDevice.swift in Sources */,
+				77F51FFC2015C49500BD9678 /* ModelFacade.swift in Sources */,
+				77F51FF52015C49500BD9678 /* DeviceModel.swift in Sources */,
+				77F51FEF2015C49500BD9678 /* IDeviceRouter.swift in Sources */,
+				77F51FFE2015C49500BD9678 /* DeviceFactory.swift in Sources */,
+				77F5202E2015C78200BD9678 /* ASR.swift in Sources */,
+				77F520062015C49500BD9678 /* Dictionary+Json.swift in Sources */,
+				77F5201B2015C6A200BD9678 /* WebSocket.swift in Sources */,
+				77F5202C2015C78200BD9678 /* RemoteLog.swift in Sources */,
+				77F51FFB2015C49500BD9678 /* ModelOperation.swift in Sources */,
+				77F520042015C49500BD9678 /* Conversions.swift in Sources */,
+				77F520032015C49500BD9678 /* NSData+Extensions.swift in Sources */,
+				77F520282015C78200BD9678 /* RemoteMemory.swift in Sources */,
+				77F520292015C78200BD9678 /* Voice.swift in Sources */,
+				77F5202D2015C78200BD9678 /* MusicPlayer.swift in Sources */,
+				77F51FFA2015C49500BD9678 /* HttpRequest.swift in Sources */,
+				77F51FF82015C49500BD9678 /* IModelFacade.swift in Sources */,
+				77F520152015C5F300BD9678 /* PackageFactory.swift in Sources */,
+				77F520072015C49500BD9678 /* String.swift in Sources */,
+				77F51FFD2015C49500BD9678 /* BaseModel.swift in Sources */,
+				77F51FF12015C49500BD9678 /* DeviceRouter.swift in Sources */,
+				77F51FF92015C49500BD9678 /* Encoding.swift in Sources */,
+				77F5202A2015C78200BD9678 /* Console.swift in Sources */,
+				77F51FF72015C49500BD9678 /* TCPSession.swift in Sources */,
+				77F520012015C49500BD9678 /* NSDate+Extensions.swift in Sources */,
+				77F51FF02015C49500BD9678 /* WebSocketModel.swift in Sources */,
+				77F51FF42015C49500BD9678 /* IDevice.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,6 +626,7 @@
 		77F51FCC2015C3A900BD9678 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = r2ProjectTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -387,6 +640,7 @@
 		77F51FCD2015C3A900BD9678 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = r2ProjectTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

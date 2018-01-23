@@ -1,0 +1,67 @@
+//
+//  ISocketSession.swift
+//  GardenController
+//
+//  Created by Tord Wessman on 07/12/16.
+//  Copyright © 2016 Axel IT AB. All rights reserved.
+//
+
+import Foundation
+
+/** Optional. Session delegate specifications. */
+public protocol CanReceiveSessionData {
+
+    /** Called whenever data was received from host. */
+    func onSessionReceive(session: ISocketSession, response: InputStream.JsonDictionaryType)
+    
+    /** Called whet connection to host is established. */
+    func onSessionConnect(session: ISocketSession)
+    
+    /** Called upon disconnection from host. */
+    func onSessionDisconnect(session: ISocketSession)
+    
+    /** Called whenever an error occured. */
+    func onSessionError(session: ISocketSession, error: Error?)
+    
+}
+
+extension CanReceiveSessionData {
+    
+    public func onSessionReceive(session: ISocketSession, response: InputStream.JsonDictionaryType) {}
+    public func onSessionConnect(session: ISocketSession) { Log.d ("Connected: " + session.address) }
+    public func onSessionDisconnect(session: ISocketSession) { Log.d ("Disconnected: " + session.address)  }
+    public func onSessionError(session: ISocketSession, error: Error?) {Log.d ("Error: " + session.address + ". Description: " + (error?.localizedDescription ?? "[none]" )) }
+    
+}
+
+public protocol ISocketSession {
+    
+    /** If set, the server will try to reconnect using this interval upon disconnection. */
+    var reconnectionInterval: Int? { get set }
+    
+    /** The endpoint address of this session. */
+    var address: String { get }
+    
+    /** Returns true if connection is established to host. */
+    var isConnected: Bool { get }
+
+    /** Connects to host using the specified parameters. */
+    func connect()
+    
+    /** Disconnect from host. */
+    func disconnect()
+    
+    /** Adds a CanReceiveSessionData listener which will be notified upon changes. */
+    func addObserver(observer: CanReceiveSessionData)
+    
+    /** Sends the JSONConvertable data to host. `delegate` is called upon reply, but it's is optional since an imediate reply can't allways be expected from host. */
+    func send(model: JSONRequest, delegate: InputStream.JsonDictonaryResponseType? ) -> Bool
+    
+}
+
+extension ISocketSession {
+    
+    /** Renders `delegate` optional. */
+    //public func send(model: JSONRequest, delegate: InputStream.JsonDictonaryResponseType? = nil) { send (model: model, delegate: nil) }
+    
+}

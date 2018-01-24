@@ -124,7 +124,7 @@ public class WebSocketSession: ISocketSession {
         m_observers.append(observer)
     }
     
-    public func send(model: JSONRequest, delegate: InputStream.JsonDictonaryResponseType? ) -> Bool {
+    public func send(model: JSONRequest, delegate: InputStream.JsonDictonaryResponseType? ) {
         
         m_queue.addOperation() {
             
@@ -149,18 +149,16 @@ public class WebSocketSession: ISocketSession {
                     
                 } else {
                     
-                    Log.d ("UNABLE TO CREATE DATA FROM PARAMETERS")
+                    assertionFailure("UNABLE TO CREATE DATA FROM PARAMETERS")
                 }
                 
             } catch {
                 
-                Log.d("UNABLE TO ENCODE PARAMETERS")
+                assertionFailure("UNABLE TO ENCODE PARAMETERS")
                 
             }
 
         }
-        
-        return true
         
     }
     

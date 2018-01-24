@@ -55,7 +55,7 @@ public protocol ISocketSession {
     func addObserver(observer: CanReceiveSessionData)
     
     /** Sends the JSONConvertable data to host. `delegate` is called upon reply, but it's is optional since an imediate reply can't allways be expected from host. */
-    func send(model: JSONRequest, delegate: InputStream.JsonDictonaryResponseType? ) -> Bool
+    func send(model: JSONRequest, delegate: InputStream.JsonDictonaryResponseType? )
     
 }
 

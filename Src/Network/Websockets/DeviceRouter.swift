@@ -49,7 +49,7 @@ public class DeviceRouter: CanReceiveSessionData, IDeviceRouter {
         request.action = propertyName
         request.addParam(value: value)
         
-        m_session.send(model: request) { (response, error) in
+        let _ = m_session.send(model: request) { (response, error) in
             
             delegate?(response, error)
             
@@ -97,7 +97,7 @@ public class DeviceRouter: CanReceiveSessionData, IDeviceRouter {
         
         request.type = .get
         
-        m_session.send(model: request) { (response, error) in
+        let _ = m_session.send(model: request) { (response, error) in
             
             delegate?(response, error)
             

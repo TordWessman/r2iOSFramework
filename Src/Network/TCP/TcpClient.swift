@@ -82,16 +82,11 @@ internal class TcpClient: NSObject, StreamDelegate {
 
     }
     
-    public func send(data: Data, delegate: ((_ data: Data?, _ error: Error?)->())? ) -> Bool{
+    public func send(data: Data, delegate: ((_ data: Data?, _ error: Error?)->())? ) {
     
+        guard isReady else { return assertionFailure("Connection not ready") }
+
         m_delegate = delegate
-        
-        guard isReady else {
-            
-            return false
-        }
-        
-        return true
         
     }
     

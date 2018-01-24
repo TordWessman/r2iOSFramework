@@ -63,20 +63,19 @@ public class TCPSession: ISocketSession {
         
     }
 
-    public func send(model: JSONRequest, delegate: InputStream.JsonDictonaryResponseType?) -> Bool {
+    public func send(model: JSONRequest, delegate: InputStream.JsonDictonaryResponseType?) {
     
         let requestMessage = TCPMessage(code: 0, payload: model.json as InputStream.JsonDictionaryType, destination: model.url, headers: model.headers as InputStream.JsonDictionaryType)
         
         guard let requestData =  m_serializer.serialize(message:  requestMessage) else {
         
-            Log.d("Unable to serialize message for destination: \(model.url)")
-            return false
+            return assertionFailure("Unable to serialize message for destination: \(model.url)")
             
         }
         
         if (m_client.isReady) {
             
-            return m_client.send(data: requestData, delegate: { [weak self] (responseData, error) in
+            m_client.send(data: requestData, delegate: { [weak self] (responseData, error) in
                 
                 guard error == nil else {
                     
@@ -120,11 +119,10 @@ public class TCPSession: ISocketSession {
                 delegate?(responseMessage.payload, nil)
 
             })
+            
         }
             
-        Log.d ( Log.d("Unable to send message to destination: \(model.url). Connection not ready."))
-        
-        return false
+        assertionFailure("Unable to send message to destination: \(model.url). Connection not ready.")
         
     }
     

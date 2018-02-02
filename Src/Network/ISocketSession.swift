@@ -45,8 +45,8 @@ public protocol ISocketSession {
     /** Returns true if connection is established to host. */
     var isConnected: Bool { get }
 
-    /** Connects to host using the specified parameters. */
-    func connect()
+    /** Connects to host using the specified parameters. The delegate method will be called with "true" if connection was successfull and "false" otherwise. */
+    func connect(_ delegate: ((Bool) -> ())?)
     
     /** Disconnect from host. */
     func disconnect()

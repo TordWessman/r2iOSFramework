@@ -23,6 +23,9 @@ public class WebSocketSession: ISocketSession {
     private var m_queue: OperationQueue
     private var m_reconnectionCount: Int
     
+    // If true, the web socket is in the process of connecting
+    private var m_connecting: Bool
+    
     public var address: String { return String(format: "ws://%@:%d%@", m_host, m_port, m_path) }
     public var isConnected: Bool { return m_ws?.readyState == .open }
     private(set) public var error: Error?
@@ -35,20 +38,22 @@ public class WebSocketSession: ISocketSession {
         m_path = path ?? ""
         m_observers = Array<CanReceiveSessionData>()
         m_reconnectionCount = 0
+        m_connecting = false
         
     }
    
     // PRAGMA Mark - public network methods
    
-    public func connect() {
+    public func connect(_ delegate: ((Bool) -> ())? = nil) {
         
+        m_connecting = true
         m_ws = WebSocket(address)
         
         m_ws?.event.error =  { [weak self] webSocketError in
            
             var error = webSocketError
             
-            if (self?.m_reconnectionCount ?? Int.max) > WebSocketSession.maxReconnectionAttempts {
+            if self?.m_connecting == true && (self?.m_reconnectionCount ?? Int.max) > WebSocketSession.maxReconnectionAttempts {
             
                 // Did reach maximum retries. Will cease reconnection attempts.
                 
@@ -56,6 +61,7 @@ public class WebSocketSession: ISocketSession {
                 
                 self?.m_timer?.invalidate()
                 self?.m_reconnectionCount = 0
+                delegate?(false)
                 
             }
             
@@ -65,6 +71,9 @@ public class WebSocketSession: ISocketSession {
 
         m_ws?.event.open = { [weak self] in
             
+            self?.m_connecting = false
+            delegate?(true)
+            
             self?.error = nil
             self?.m_timer?.invalidate()
             self?.m_observers.forEach{ $0.onSessionConnect(session: self!) }
@@ -73,6 +82,7 @@ public class WebSocketSession: ISocketSession {
         
         m_ws?.event.close = { [weak self] code, reason, clean in
 
+            self?.m_connecting = false
             self?.m_observers.forEach{ $0.onSessionDisconnect(session: self!) }
             
             if let i = self?.m_reconnectionInterval {
@@ -108,6 +118,8 @@ public class WebSocketSession: ISocketSession {
             }
             
         }
+        
+        m_ws?.open()
 
     }
 

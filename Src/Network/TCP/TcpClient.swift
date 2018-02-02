@@ -31,20 +31,54 @@ internal extension Data {
     
 }
 
+internal extension Stream.Status {
+    
+    // Unable to fetch this information in a readable way otherwise..
+    internal var description: String {
+        
+        switch self {
+            
+            case .notOpen: return "notOpen"
+            
+            case .opening: return "opening"
+            
+            case .open: return "open"
+            
+            case .reading: return "reading"
+            
+            case .writing: return "writing"
+            
+            case .atEnd: return "atEnd"
+            
+            case .closed: return "closed"
+            
+            case .error: return "error"
+
+        }
+
+    }
+}
+
 internal class TcpClient: NSObject, StreamDelegate {
     
     public typealias ReceiveDelegateType = ((_ data: Data?, _ error: Error?)->())
+    typealias ConnectionDelegateType = ((_ success: Bool, _ error: Error?) ->())
+    
     typealias InputStreamType = Unmanaged<CFReadStream>
     typealias OutputStreamType = Unmanaged<CFWriteStream>
+    
     private var m_outputStreamRef: OutputStreamType?
     private var m_inputStreamRef: InputStreamType?
     
     private var m_outputStream: OutputStream?
     private var m_inputStream: InputStream?
     
-    private var m_host: String!
-    private var m_port: Int!
+    private var m_host: String
+    private var m_port: Int
     private var m_delegate: ReceiveDelegateType?
+    
+    // Called whenever a connection is successfull (or failing)
+    private var m_onConnect: ConnectionDelegateType?
     
     // Will be called whenever an error was identified
     public var onError: ((Error?) -> ())?
@@ -54,9 +88,9 @@ internal class TcpClient: NSObject, StreamDelegate {
     
     // Will be called if data was received outside a send() call.
     public var onReceive: ReceiveDelegateType?
-   
+    
     // Statuses indicating that the there's a connection establised
-    private let connectedStatuses: [Stream.Status] = [Stream.Status.open, Stream.Status.opening, Stream.Status.reading, Stream.Status.writing, Stream.Status.atEnd]
+    private let connectedStatuses: [Stream.Status] = [.open, .opening, .reading, .writing, .atEnd]
     
     public init(host: String, port: Int) {
     
@@ -68,18 +102,24 @@ internal class TcpClient: NSObject, StreamDelegate {
     // Returns true if the connection is ready for communication.
     public var isReady: Bool {
 
-        return isConnected //&& m_inputStream?.streamStatus == .open && m_outputStream?.streamStatus == .open
+        return m_inputStream?.streamStatus == .open && m_outputStream?.streamStatus == .open
         
     }
     
     public var host: String { return m_host }
     
-    // Returns true if the connection is connected to host.
+    // Returns true if the connection has been established to host
     public var isConnected: Bool {
-    
-        return connectedStatuses.contains(m_inputStream?.streamStatus ?? .notOpen) &&
-               connectedStatuses.contains(m_outputStream?.streamStatus ?? .notOpen)
 
+        return  connectedStatuses.contains(m_inputStream?.streamStatus ?? .notOpen) &&
+                connectedStatuses.contains(m_outputStream?.streamStatus ?? .notOpen)
+
+    }
+    
+    public override var description: String {
+        
+        return "TcpClient. Host: \(m_host) Port: \(m_port ). Stream statuses: \(m_outputStream?.streamStatus.description ?? "nil" )/ \(m_inputStream?.streamStatus.description ?? "nil")"
+        
     }
     
     public func send(data: Data, delegate: ((_ data: Data?, _ error: Error?)->())? ) {
@@ -88,17 +128,22 @@ internal class TcpClient: NSObject, StreamDelegate {
 
         m_delegate = delegate
         
+        m_outputStream?.write([UInt8](data), maxLength: data.count)
+        
     }
     
-    public func connect(delegate: ((_ success: Bool, _ error: Error?) ->())? ) {
+    public func connect(delegate: ConnectionDelegateType? ) {
 
+        m_onConnect = delegate
+        
         Log.d ("Connecting...")
         
         guard let url =  URL(string: m_host), let urlHost = url.host as CFString?  else {
             
-            Log.d("TCP ERROR: Unable to create url from \(m_host)")
+            assertionFailure("TCP ERROR: Unable to create url from \(m_host)")
             
             delegate?(false, NetworkError.ConnectionError("TCP ERROR: Unable to create url from \(m_host)"))
+            m_onConnect = nil
             return
        
         }
@@ -107,9 +152,9 @@ internal class TcpClient: NSObject, StreamDelegate {
     
         guard let outputStreamRef = m_outputStreamRef else {
         
-             Log.d("TCP ERROR: The stream was not allocated for \(m_host)")
-            
+            assertionFailure("TCP ERROR: The stream was not allocated for \(m_host)")
             delegate?(false, NetworkError.ConnectionError("TCP ERROR: The stream was not allocated for \(m_host)"))
+            m_onConnect = nil
             return
 
         }
@@ -118,6 +163,7 @@ internal class TcpClient: NSObject, StreamDelegate {
             
             Log.d("Unable to open write stream to host: \(m_host) on port: \(m_port)")
             delegate?(false, NetworkError.ConnectionError("Unable to open write stream to host: \(m_host) on port: \(m_port)"))
+            m_onConnect = nil
             return
             
         }
@@ -130,6 +176,7 @@ internal class TcpClient: NSObject, StreamDelegate {
             Log.d("Unable to create retained streams for host: \(m_host) on port: \(m_port)")
             
             delegate?(false, NetworkError.ConnectionError("Unable to create retained streams for host: \(m_host) on port: \(m_port)"))
+            m_onConnect = nil
             
             return
             
@@ -144,8 +191,33 @@ internal class TcpClient: NSObject, StreamDelegate {
         m_outputStream?.open()
         m_inputStream?.open()
         
-       delegate?(true, nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+            // Put your code which should be executed with a delay here
+        })
+
+        // Start the call-delegate-process (delegate will be called when status is .open)
+        callDelegate(target: nil)
+    }
+    
+    @objc private func callDelegate(target: Any?) {
         
+        // Only call delegate when statuses are .open
+        if (isReady) {
+            
+            m_onConnect?(true, nil)
+            m_onConnect = nil
+            
+        } else if (!isConnected) {
+            
+            m_onConnect?(false, NetworkError.ConnectionError("Connection failed to change state to .open. \(description)"))
+            m_onConnect = nil
+            
+        } else {
+            
+            Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(callDelegate), userInfo: nil, repeats: false)
+            
+        }
+
     }
     
     public func disconnect() {
@@ -201,7 +273,7 @@ internal class TcpClient: NSObject, StreamDelegate {
                 
                 if (m_delegate == nil) {
                     
-                    // The delegate was not set, indicating that this data was sent by the server "not inside a client.send() context". 
+                    // The delegate was not set, indicating that this data was sent by the server spontaneously ("not inside a client.send() context"). 
                     onReceive?(data, stream.streamError)
                     
                 } else {

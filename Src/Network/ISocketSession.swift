@@ -29,7 +29,7 @@ extension CanReceiveSessionData {
     
     public func onSessionReceive(session: ISocketSession, response: InputStream.JsonDictionaryType) {}
     public func onSessionConnect(session: ISocketSession) { Log.d ("Connected: " + session.address) }
-    public func onSessionDisconnect(session: ISocketSession) { Log.d ("Disconnected: " + session.address)  }
+    public func onSessionDisconnect(session: ISocketSession) { Log.d("Disconnected from \(session.address).")  }
     public func onSessionError(session: ISocketSession, error: Error?) {Log.d ("Error: " + session.address + ". Description: " + (error?.localizedDescription ?? "[none]" )) }
     
 }

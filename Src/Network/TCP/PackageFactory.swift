@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum NetworkError : Error {
+enum NetworkError: Error {
     case SerializationError(String)
     case ConnectionError(String)
     case NoDataError(String)
@@ -145,15 +145,18 @@ internal class PackageFactory {
             let payloadSize: Int32 = try s.read(Int32.self)
             let destination: String = destinationSize > 0 ? String(data: try s.read(Int(destinationSize)), encoding: .utf8) ?? "" : ""
             let headers: InputStream.JsonDictionaryType = headerSize > 0 ? try s.json(Int(headerSize)) : InputStream.JsonDictionaryType()
-            let payloadDataType: Int16 = try s.read(Int16.self) // payloadDataType == self.dynamicType (no other implementations atm).
+            let payloadDataType: Int16 = try s.read(Int16.self)
             var payload: InputStream.JsonDictionaryType = InputStream.JsonDictionaryType()
             
             if (payloadSize > 0) {
                 
                 switch payloadDataType {
+                    
                 case dynamicType:
+                    
                     payload = try s.json(Int(payloadSize))
                     break
+                    
                 default:
                     
                     // Try interpret as a string:
@@ -182,8 +185,7 @@ internal class PackageFactory {
         for array in arrays { ret += array }
         
         return ret
+        
     }
-    
-    
     
 }

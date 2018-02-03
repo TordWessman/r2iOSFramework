@@ -38,6 +38,22 @@ public class TCPSession: ISocketSession {
     
     public func connect(_ delegate: ((Bool) -> ())? = nil) {
 
+        m_client.onClose = { [weak self] (client) in
+        
+            guard let this = self else { return }
+            
+            this.m_observers.forEach({ (observer) in observer.onSessionDisconnect(session: this) })
+            
+        }
+        
+        m_client.onError = { [weak self] (client, error) in
+            
+            guard let this = self else { return }
+            
+            this.m_observers.forEach({ (observer) in observer.onSessionError(session: this, error: error) })
+            
+        }
+        
         m_client.connect { [weak self] (success, error) in
             
             delegate?(success)
@@ -75,10 +91,11 @@ public class TCPSession: ISocketSession {
 
         m_client.send(data: requestData, delegate: { [weak self] (responseData, error) in
             
+            guard let this = self else { return assertionFailure("TCPSession was deallocated.") }
             guard error == nil else {
                 
                 delegate?(nil, error)
-                self?.m_observers.forEach({ (observer) in observer.onSessionError(session: self!, error: error) })
+                this.m_observers.forEach({ (observer) in observer.onSessionError(session: this, error: error) })
                 
                 return
             }
@@ -86,7 +103,7 @@ public class TCPSession: ISocketSession {
                 
                 let error = NetworkError.NoDataError("TCPSession send error: no data received. \(requestMessage.destination)")
                 delegate?(nil, error)
-                self?.m_observers.forEach({ (observer) in observer.onSessionError(session: self!, error: error) })
+                this.m_observers.forEach({ (observer) in observer.onSessionError(session: this, error: error) })
                 
                 return
             }
@@ -95,7 +112,7 @@ public class TCPSession: ISocketSession {
                 
                 let error = NetworkError.SerializationError("TCPSession send error: Unable to deserialize response. \(requestMessage.destination)")
                 delegate?(nil, error)
-                self?.m_observers.forEach({ (observer) in observer.onSessionError(session: self!, error: error) })
+                this.m_observers.forEach({ (observer) in observer.onSessionError(session: this, error: error) })
                 
                 return
                 
@@ -105,14 +122,14 @@ public class TCPSession: ISocketSession {
                 
                 let error = NetworkError.ResponseError("Bad response code: \(responseMessage.code) payload: \(String(describing: responseMessage.payload))")
                 delegate?(nil, error)
-                self?.m_observers.forEach({ (observer) in observer.onSessionError(session: self!, error: error) })
+                this.m_observers.forEach({ (observer) in observer.onSessionError(session: this, error: error) })
                 
                 return
                 
             }
             
             Log.d("Got response from \(self?.m_client.host ?? ""). Data: \(responseMessage.payload)")
-            self?.m_observers.forEach({ (observer) in observer.onSessionReceive(session: self!, response: responseMessage.payload) })
+            this.m_observers.forEach({ (observer) in observer.onSessionReceive(session: this, response: responseMessage.payload) })
             
             delegate?(responseMessage.payload, nil)
 

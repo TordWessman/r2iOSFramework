@@ -81,10 +81,10 @@ internal class TcpClient: NSObject, StreamDelegate {
     private var m_onConnect: ConnectionDelegateType?
     
     // Will be called whenever an error was identified
-    public var onError: ((Error?) -> ())?
+    public var onError: ((TcpClient, Error?) -> ())?
     
     // Will be called when the connection is closed
-    public var onClose: (() -> ())?
+    public var onClose: ((TcpClient) -> ())?
     
     // Will be called if data was received outside a send() call.
     public var onReceive: ReceiveDelegateType?
@@ -199,6 +199,7 @@ internal class TcpClient: NSObject, StreamDelegate {
         callDelegate(target: nil)
     }
     
+    // Will be called in order to inform the delegate that the connection is established
     @objc private func callDelegate(target: Any?) {
         
         // Only call delegate when statuses are .open
@@ -288,12 +289,12 @@ internal class TcpClient: NSObject, StreamDelegate {
         } else if (eventCode == Stream.Event.errorOccurred) {
             
             disconnect()
-            onError?(stream.streamError)
+            onError?(self, stream.streamError)
             
         } else if (eventCode == Stream.Event.endEncountered) {
             
             disconnect()
-            onClose?()
+            onClose?(self)
         
         } else {
             

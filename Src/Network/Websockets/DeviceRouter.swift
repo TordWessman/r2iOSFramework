@@ -9,8 +9,11 @@
 import Foundation
 
 public class DeviceRouter: CanReceiveSessionData, IDeviceRouter {
+    
     public func onSessionError(session: ISocketSession, error: Error?) {
         
+        Log.d("Error: \(String(describing: error)) for connection: \(session.address)")
+    
     }
     
     private var m_session: ISocketSession

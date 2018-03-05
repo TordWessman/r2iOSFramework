@@ -8,7 +8,7 @@
 
 import Foundation
 
-
+/** Message types defined py r2Server. */
 public enum MessageType: Int {
     case message = 0
     case warning = 1
@@ -16,6 +16,7 @@ public enum MessageType: Int {
     case temp = 3
 }
 
+/** r2Server log message representation. */
 public protocol IConsoleMessage: StringConvertable {
     
     var text: String? {get}
@@ -25,6 +26,7 @@ public protocol IConsoleMessage: StringConvertable {
     
 }
 
+/** Simplifies the colour output representation of a message. */
 public extension IConsoleMessage {
     
     public var color: UIColor {
@@ -46,6 +48,11 @@ public extension IConsoleMessage {
 
 public struct ConsoleMessage: IConsoleMessage, JSONInitializable {
     
+    let MessageProperty = "Message"
+    let TypeProperty = "Type"
+    let TagProperty = "Tag"
+    let TimeStampProperty = "TimeStamp"
+    
     private(set) public var text: String?
     private(set) public var type: MessageType?
     private(set) public var tag: String?
@@ -62,14 +69,14 @@ public struct ConsoleMessage: IConsoleMessage, JSONInitializable {
     
     public init? (json: InputStream.JsonDictionaryType?) {
         
-        guard let text: String = json?.parse(key: "Message"),
-            let rawType: Int = json?.parse(key: "Type"),
+        guard let text: String = json?.parse(key: MessageProperty),
+            let rawType: Int = json?.parse(key: TypeProperty),
             let type: MessageType = MessageType(rawValue: rawType) else { return; }
         
         self.type = type
         self.text = text
-        tag = json?.parse(key: "Tag")
-        timeStamp = json?.parse(key: "TimeStamp")
+        tag = json?.parse(key: TagProperty)
+        timeStamp = json?.parse(key: TimeStampProperty)
         
     }
     
@@ -77,12 +84,14 @@ public struct ConsoleMessage: IConsoleMessage, JSONInitializable {
     
 }
 
+/** Represents an entity capable of asynchronously receiving ConsoleMessage */
 public protocol IRemoteLog {
     
     var onReceive: (([ConsoleMessage]) -> ())? { get set }
     
 }
 
+/** RPC bridge to a remote logger. Update events should be received whenever a new logging event occurs on remote. */
 public class RemoteLog: DeviceBase, IRemoteLog {
     
     public var onReceive: (([ConsoleMessage]) -> ())?

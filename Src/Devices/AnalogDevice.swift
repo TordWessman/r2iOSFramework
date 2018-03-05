@@ -8,6 +8,7 @@
 
 import Foundation
 
+/** Human readable definition of remote device types. */
 public enum AnalogDeviceType: Int {
     
     case undefined = 0
@@ -19,12 +20,14 @@ public enum AnalogDeviceType: Int {
     
 }
 
+/** Implementations represents an analogue input port */
 public protocol IInputPort {
 
     var value: Bool {get}
     
 }
 
+/** Implementation represents an analogue remote device */
 public protocol IAnalogDevice: IDevice {
     
     associatedtype T
@@ -34,6 +37,7 @@ public protocol IAnalogDevice: IDevice {
     
 }
 
+/** RPC representation of an digital input port */
 public class InputPort: IInputPort {
     
     private var m_device: AnalogDevice<Bool>
@@ -61,6 +65,7 @@ public class InputPort: IInputPort {
     
 }
 
+/** RPC representation of any analogue device. */
 public class AnalogDevice<T>: DeviceBase, IAnalogDevice {
     
     private var m_value: T?

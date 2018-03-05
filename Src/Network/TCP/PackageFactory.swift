@@ -16,12 +16,13 @@ enum NetworkError: Error {
     
 }
 
+/** Provides mechanisms for reading out data of a specified length or a JsonDictionaryType object.   */
 public extension InputStream {
     
     public typealias JsonDictionaryType = [String: Any]
     public typealias JsonDictonaryResponseType = ((InputStream.JsonDictionaryType?, Error?) -> ())
     
-    // Reads size bytes and deserializes inte a json object
+    /** Reads size bytes and deserializes inte a json object */
     func json (_ size: Int) throws -> JsonDictionaryType {
     
         guard let dd = try JSONSerialization.jsonObject(with: read(size), options: JSONSerialization.ReadingOptions.mutableContainers) as? JsonDictionaryType else {
@@ -34,7 +35,7 @@ public extension InputStream {
     
     }
     
-    // Reads count bytes and returns an allocated Data object
+    /** Reads count bytes and returns an allocated Data object */
     func read (_ count: Int) throws -> Data {
         
         let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: count)
@@ -61,7 +62,7 @@ public extension InputStream {
         
     }
     
-    // Reads and returns the type T
+    /** Reads and returns the type T */
     func read<T> (_: T.Type) throws -> T {
         
         let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: MemoryLayout<T>.size)
@@ -79,9 +80,10 @@ public extension InputStream {
     
 }
 
+/** Provides mechanisms for serialization of value types into byte arrays. */
 internal extension Data {
 
-    // Transforms the value of type T into a raw byte array
+    // Transforms the value of the value type T into a raw byte array
     static func serialize<T>(_ value: T, _ count: Int? = nil) -> [UInt8] {
         
         var value: T = value
@@ -100,7 +102,7 @@ internal extension Data {
     }
     
 }
-
+/** Responsible for serialization/deserialization of raw bytes into/from TCPMessage.*/
 internal class PackageFactory {
     
     // This is a constant value defined by the backend, informing that dynamic types (serialized object) is sent to the backend
@@ -160,7 +162,7 @@ internal class PackageFactory {
                 default:
                     
                     // Try interpret as a string:
-                    payload = try ["Data": String(bytes: s.read(Int(payloadSize)), encoding: String.Encoding.utf8) as Any]
+                    payload = try ["Data": String(bytes: s.read(Int(payloadSize)), encoding: .utf8) as Any]
                     
                 }
                 
@@ -178,6 +180,7 @@ internal class PackageFactory {
         
     }
     
+    /** Concatinates a series of byte arrays. */
     fileprivate func concat(arrays: [UInt8]...) -> [UInt8] {
         
         var ret: [UInt8] = [UInt8]()

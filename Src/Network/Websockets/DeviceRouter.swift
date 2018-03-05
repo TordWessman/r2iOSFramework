@@ -12,11 +12,14 @@ public class DeviceRouter: CanReceiveSessionData, IDeviceRouter {
     
     public func onSessionError(session: ISocketSession, error: Error?) {
         
-        Log.d("Error: \(String(describing: error)) for connection: \(session.address)")
+        Log.d("\(String(describing: error)) for connection: \(session.address)", .error)
     
     }
     
+    // Connection to the remote host
     private var m_session: ISocketSession
+    
+    // List of all devices connected. <Device identifier: Device representation>
     private var m_devices: [String: IDevice]
     
     public var ready: Bool { return m_session.isConnected }

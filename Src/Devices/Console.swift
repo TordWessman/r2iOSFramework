@@ -8,31 +8,39 @@
 
 import Foundation
 
+/** Represents a remote console. The console will output r2Server's log messages and is capable of receiving commands. */
 public protocol IConsole {
     
-    /*! Did receive messages for a console. */
+    /** Did receive messages for a console. */
     var onReceive: (([ConsoleMessage]) -> ())? { get set }
     
-    /*! Write to the remote console. */
+    /** Write to the remote console. Remote will evaluate the expression */
     func write (text: String)
     
-    /*! Calls for a console history fetch. */
+    /** Calls for a console history fetch. */
     func updateHistory(count: Int)
     
 }
 
+/** RPC bidge coupled to the r2Server's console instance. Allows dynamic interaction without ssh-access*/
 public class Console: DeviceBase, IConsole {
+    
+    // Action requesting the evaluation of a string into a executable command
+    let InterpretCommand = "InterpretText"
+    
+    // Action requesting the console history
+    let GetHistoryCommand = "GetHistory"
     
     public var onReceive: (([ConsoleMessage]) -> ())?
     
     public func write(text: String) {
         
         //super.deviceRouter?.invoke(device: self, action: "InterpretText", parameters: [text]
-        super.deviceRouter?.invoke(device: self, action: "InterpretText", parameters: [text], delegate: { [weak self] (json, error) in
+        super.deviceRouter?.invoke(device: self, action: InterpretCommand, parameters: [text], delegate: { [weak self] (json, error) in
             
             guard let message: ConsoleMessage = json?.model(key: DeviceModel.ActionResponse),
                 let action: String = json?.parse(key: DeviceModel.Action),
-                action == "InterpretText" else { return;  }
+                action == self?.InterpretCommand else { return;  }
             
             self?.onReceive?([message])
             
@@ -43,7 +51,7 @@ public class Console: DeviceBase, IConsole {
     
     public func updateHistory(count: Int) {
         
-        super.deviceRouter?.invoke(device: self, action: "GetHistory", parameters: [count])
+        super.deviceRouter?.invoke(device: self, action: GetHistoryCommand, parameters: [count])
         
     }
  
@@ -54,7 +62,7 @@ public class Console: DeviceBase, IConsole {
         
         guard let messages: [ConsoleMessage] = json.models(key: DeviceModel.ActionResponse),
             let action: String = json.parse(key: DeviceModel.Action),
-            action == "GetHistory" else { return;  }
+            action == GetHistoryCommand else { return;  }
 
         
 

@@ -8,7 +8,7 @@
 
 import Foundation
 
-/** Represents a remote web socket server. */
+/** Represents a remote web socket server. Currently broken on the server side... */
 public class WebSocketServerModel: JSONRequest, JSONInitializable {
     
     private(set) public var id: String

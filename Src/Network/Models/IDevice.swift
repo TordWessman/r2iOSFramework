@@ -8,6 +8,7 @@
 
 import Foundation
 
+/** Basic representation of a remote device capable of RPC communication with a host. */
 public protocol IDevice {
     
     var id: String { get }

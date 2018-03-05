@@ -65,8 +65,10 @@ public struct Param {
     
 }
 
+/** Protocol definition of the subject of a device during RPC communication. */
 public final class DeviceModel: JSONObjectRequest {
     
+    /** Contains the object representation in JSON format. */
     private(set) public var object: [String:AnyObject]?
     
     // Type of action (i.e Get, Invoke, Set)
@@ -109,6 +111,7 @@ public final class DeviceModel: JSONObjectRequest {
     
 }
 
+/** RPC request model used to invoke a DeviceModel */
 public class JSONObjectRequest: JSONRequest {
     
     public var type: ActionType?

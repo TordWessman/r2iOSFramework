@@ -8,12 +8,14 @@
 
 import Foundation
 
+
 public protocol IServo: IDevice {
 
     var value: Float? {get set}
     
 }
 
+/** RPC bridge to a remote servo */
 public class Servo: DeviceBase, IServo {
     
     private var m_value: Float?

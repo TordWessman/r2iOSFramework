@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		77A2D70E204D88CF008F5E1D /* DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A2D70D204D88CF008F5E1D /* DataTests.swift */; };
+		77A2D71120500B29008F5E1D /* SerializationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A2D70F20500A9A008F5E1D /* SerializationExtensions.swift */; };
 		77F51FBE2015C3A900BD9678 /* r2Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F51FB42015C3A900BD9678 /* r2Project.framework */; };
 		77F51FC32015C3A900BD9678 /* r2ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F51FC22015C3A900BD9678 /* r2ProjectTests.swift */; };
 		77F51FC52015C3A900BD9678 /* r2Project.h in Headers */ = {isa = PBXBuildFile; fileRef = 77F51FB72015C3A900BD9678 /* r2Project.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -68,6 +70,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		77A2D70D204D88CF008F5E1D /* DataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTests.swift; sourceTree = "<group>"; };
+		77A2D70F20500A9A008F5E1D /* SerializationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerializationExtensions.swift; sourceTree = "<group>"; };
 		77F51FB42015C3A900BD9678 /* r2Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = r2Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F51FB72015C3A900BD9678 /* r2Project.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = r2Project.h; sourceTree = "<group>"; };
 		77F51FB82015C3A900BD9678 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -179,6 +183,7 @@
 			children = (
 				77F51FC22015C3A900BD9678 /* r2ProjectTests.swift */,
 				77F51FC42015C3A900BD9678 /* Info.plist */,
+				77A2D70D204D88CF008F5E1D /* DataTests.swift */,
 			);
 			path = r2ProjectTests;
 			sourceTree = "<group>";
@@ -265,6 +270,7 @@
 				77F51FEC2015C49500BD9678 /* Dictionary+Json.swift */,
 				77F51FED2015C49500BD9678 /* String.swift */,
 				77F51FEE2015C49500BD9678 /* Numbers+Extensions.swift */,
+				77A2D70F20500A9A008F5E1D /* SerializationExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -447,6 +453,7 @@
 				77F51FF72015C49500BD9678 /* TCPSession.swift in Sources */,
 				77F520012015C49500BD9678 /* NSDate+Extensions.swift in Sources */,
 				77F51FF02015C49500BD9678 /* WebSocketModel.swift in Sources */,
+				77A2D71120500B29008F5E1D /* SerializationExtensions.swift in Sources */,
 				77F51FF42015C49500BD9678 /* IDevice.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -456,6 +463,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77F51FC32015C3A900BD9678 /* r2ProjectTests.swift in Sources */,
+				77A2D70E204D88CF008F5E1D /* DataTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

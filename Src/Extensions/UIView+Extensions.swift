@@ -10,7 +10,6 @@ import UIKit
 
 public extension UIView {
     
-    
     func xibSetup(nibName: String? = nil) {
         
         let name = nibName ?? String(describing: type(of: self))

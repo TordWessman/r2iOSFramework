@@ -72,8 +72,27 @@ public extension InputStream {
     
 }
 
-/** Provides mechanisms for serialization of value types into byte arrays. */
+/** Provides mechanisms for serialization, deserialization and stream conversions. */
 internal extension Data {
+    
+    /** Instantiate Data using an InputStream */
+    init(reading input: InputStream) {
+        
+        self.init()
+        
+        let bufferSize = 1024
+        let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)
+        
+        while input.hasBytesAvailable {
+            
+            let read = input.read(buffer, maxLength: bufferSize)
+            self.append(buffer, count: read)
+            
+        }
+        
+        buffer.deallocate(capacity: bufferSize)
+        
+    }
     
     /** Serializes an ´InputStream.JsonDictionaryType´ object into it's byte array representation. */
     static func serializeObject(_ jsonObject: InputStream.JsonDictionaryType) -> [UInt8]? {

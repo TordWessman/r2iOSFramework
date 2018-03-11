@@ -8,29 +8,7 @@
 
 import Foundation
 
-internal extension Data {
-    
-    // Instantiate Data using an InputStream
-    init(reading input: InputStream) {
-
-        self.init()
-
-        let bufferSize = 1024
-        let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)
-        
-        while input.hasBytesAvailable {
-            
-            let read = input.read(buffer, maxLength: bufferSize)
-            self.append(buffer, count: read)
-        
-        }
-        
-        buffer.deallocate(capacity: bufferSize)
-        
-    }
-    
-}
-
+/** Used for debug descriptions. */
 internal extension Stream.Status {
     
     // Unable to fetch this information in a readable way otherwise..
@@ -59,8 +37,10 @@ internal extension Stream.Status {
     }
 }
 
+/** Generic TCP network layer client. */
 internal class TcpClient: NSObject, StreamDelegate {
     
+    /** Delegate format for requests. */
     public typealias ReceiveDelegateType = ((_ data: Data?, _ error: Error?)->())
     typealias ConnectionDelegateType = ((_ success: Bool, _ error: Error?) ->())
     
@@ -89,7 +69,7 @@ internal class TcpClient: NSObject, StreamDelegate {
     // Will be called if data was received outside a send() call.
     public var onReceive: ReceiveDelegateType?
     
-    // Statuses indicating that the there's a connection establised
+    // Statuses indicating that the there's a connection established
     private let connectedStatuses: [Stream.Status] = [.open, .opening, .reading, .writing, .atEnd]
     
     public init(host: String, port: Int) {
@@ -99,16 +79,17 @@ internal class TcpClient: NSObject, StreamDelegate {
 
     }
 
-    // Returns true if the connection is ready for communication.
+    /** Returns true if the connection is ready for communication. */
     public var isReady: Bool {
 
         return m_inputStream?.streamStatus == .open && m_outputStream?.streamStatus == .open
         
     }
     
+    /** The host address for this connection */
     public var host: String { return m_host }
     
-    // Returns true if the connection has been established to host
+    /** Returns true if the connection has been established to host */
     public var isConnected: Bool {
 
         return  connectedStatuses.contains(m_inputStream?.streamStatus ?? .notOpen) &&
@@ -116,22 +97,35 @@ internal class TcpClient: NSObject, StreamDelegate {
 
     }
     
+    /** Debug description */
     public override var description: String {
         
         return "TcpClient. Host: \(m_host) Port: \(m_port ). Stream statuses: \(m_outputStream?.streamStatus.description ?? "nil" )/ \(m_inputStream?.streamStatus.description ?? "nil")"
         
     }
     
-    public func send(data: Data, delegate: ((_ data: Data?, _ error: Error?)->())? ) {
+    /** Sends ´data´ to the host. Will return false if no connection has been established. */
+    public func send(data: Data, delegate: ((_ data: Data?, _ error: Error?)->())? ) -> Bool {
     
-        guard isReady else { return assertionFailure("Connection not ready") }
+        guard isReady else {
+            
+            assertionFailure("Connection not ready")
+            return false
+        }
 
         m_delegate = delegate
         
-        m_outputStream?.write([UInt8](data), maxLength: data.count)
+        let bytesWritten = m_outputStream?.write([UInt8](data), maxLength: data.count)
+        
+        if bytesWritten != data.count { assertionFailure("Unable to write all bytes to stream. Bytes to write: \(data.count). Bytes written: \(String(describing: bytesWritten)).") }
+        
+        return bytesWritten == data.count
         
     }
     
+    /** Tries to connect to the network and alerting ´delegate´ about the connection status.
+        Note that this method might return before a connection has been properly established (use `delegate` for any post-connection actions).
+     */
     public func connect(delegate: ConnectionDelegateType? ) {
 
         m_onConnect = delegate
@@ -153,6 +147,7 @@ internal class TcpClient: NSObject, StreamDelegate {
         guard let outputStreamRef = m_outputStreamRef else {
         
             assertionFailure("TCP ERROR: The stream was not allocated for \(m_host)")
+            
             delegate?(false, NetworkError.ConnectionError("TCP ERROR: The stream was not allocated for \(m_host)"))
             m_onConnect = nil
             return
@@ -190,16 +185,12 @@ internal class TcpClient: NSObject, StreamDelegate {
         
         m_outputStream?.open()
         m_inputStream?.open()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
-            // Put your code which should be executed with a delay here
-        })
 
         // Start the call-delegate-process (delegate will be called when status is .open)
         callDelegate(target: nil)
     }
     
-    // Will be called in order to inform the delegate that the connection is established
+    /** Will be called in order to inform the delegate that the connection is established */
     @objc private func callDelegate(target: Any?) {
         
         // Only call delegate when statuses are .open
@@ -221,6 +212,7 @@ internal class TcpClient: NSObject, StreamDelegate {
 
     }
     
+    /** Disconnects to the server. */
     public func disconnect() {
         
         m_inputStream?.remove(from: RunLoop.current, forMode:  RunLoopMode.defaultRunLoopMode)
@@ -237,6 +229,7 @@ internal class TcpClient: NSObject, StreamDelegate {
         
     }
     
+    /** Stream delegate method. Will be called upon data stream events. */
     public func stream(_ stream: Stream, handle eventCode: Stream.Event) {
         
         if (eventCode == Stream.Event.openCompleted) {

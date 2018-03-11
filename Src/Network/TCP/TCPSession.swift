@@ -90,7 +90,7 @@ public class TCPSession: ISocketSession {
 
         guard m_client.isReady else { return assertionFailure("Unable to send message to destination: \(model.url). Client: \(m_client.description)") }
 
-        m_client.send(data: requestData, delegate: { [weak self] (responseData, error) in
+        let connectionSuccess = m_client.send(data: requestData, delegate: { [weak self] (responseData, error) in
             
             guard let this = self else { return assertionFailure("TCPSession was deallocated.") }
             guard error == nil else {
@@ -136,6 +136,15 @@ public class TCPSession: ISocketSession {
 
         })
 
+        if !connectionSuccess {
+            
+            Log.d("TCPSession was unable to connect to host: \(m_client.description).")
+            
+            let error = NetworkError.ConnectionError("TCPSession was unable to connect to host: \(m_client.description).")
+            delegate?(nil, error)
+            m_observers.forEach({ (observer) in observer.onSessionError(session: self, error: error) })
+            
+        }
         
     }
     

@@ -25,6 +25,8 @@ public class DeviceRouter: CanReceiveSessionData, IDeviceRouter {
     public var ready: Bool { return m_session.isConnected }
     
     private var m_endpoint: String
+    
+    /** Initialize using a ISocketSession representing the connection to the remote host. The ´endpoint´ is the path to the remote host's service (i.e. "/devices") */
     public init(session: ISocketSession, endpoint: String) {
         
         m_session = session

@@ -8,6 +8,7 @@
 
 import Foundation
 
+/** ISocketSession used for TCP communication. */
 public class TCPSession: ISocketSession {
     
     private var m_serializer: PackageFactory

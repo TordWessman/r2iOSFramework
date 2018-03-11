@@ -198,6 +198,7 @@
 		77F51FCF2015C49500BD9678 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				77F51FD32015C49500BD9678 /* DeviceRouter.swift */,
 				77F51FD02015C49500BD9678 /* IDeviceRouter.swift */,
 				77F51FD12015C49500BD9678 /* Websockets */,
 				77F51FD52015C49500BD9678 /* Models */,
@@ -213,7 +214,6 @@
 			isa = PBXGroup;
 			children = (
 				77F51FD22015C49500BD9678 /* WebSocketModel.swift */,
-				77F51FD32015C49500BD9678 /* DeviceRouter.swift */,
 				77F51FD42015C49500BD9678 /* WebSocketSession.swift */,
 			);
 			path = Websockets;

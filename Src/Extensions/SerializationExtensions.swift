@@ -75,6 +75,7 @@ public extension InputStream {
 /** Provides mechanisms for serialization of value types into byte arrays. */
 internal extension Data {
     
+    /** Serializes an ´InputStream.JsonDictionaryType´ object into it's byte array representation. */
     static func serializeObject(_ jsonObject: InputStream.JsonDictionaryType) -> [UInt8]? {
         
         do {
@@ -92,9 +93,7 @@ internal extension Data {
     }
 
     /** Transforms the value of the primitive value type T into a raw byte array (LSB first).
-     This methods does not apply for complex objects.
-     
-     */
+     This methods does not apply for complex objects. Use ´serializeObject´ for serializing complex data types. */
     static func serializeValue<T>(_ value: T,  count: Int? = nil) -> [UInt8] {
         
         var value: T = value

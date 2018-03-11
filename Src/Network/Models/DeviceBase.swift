@@ -28,6 +28,7 @@ public class DeviceBase: IDevice {
     
     }
     
+    /** A device needs to have an id representing it during RPC communications. The device router is coupled and used for various RPC events.*/
     public init(id: String, deviceRouter: IDeviceRouter?) {
         
         self.id = id

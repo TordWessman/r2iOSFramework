@@ -8,11 +8,11 @@
 
 import Foundation
 
-
+/** Facade used for HTTP communication. */
 protocol IModelFacade {
-    
     
     func get<T>(params: JSONRequest) -> ModelRequest<T>
     func post<T>(params: JSONRequest) -> ModelRequest<T>
     func put<T>(params: JSONRequest) -> ModelRequest<T>
+    
 }

@@ -8,6 +8,7 @@
 
 import Foundation
 
+/** Should be used when creating IDevice implementation. Will update the device (retrieving it's initial values) from remote upon device creation. */
 public class DeviceFactory {
     
     private var m_deviceRouter: IDeviceRouter

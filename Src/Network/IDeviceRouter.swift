@@ -8,8 +8,7 @@
 
 import Foundation
 
-/** Responsible for web socket communication between devices and web socket host.
- */
+/** Responsible for RPC synchronization with a remote host.*/
 public protocol IDeviceRouter {
 
     /** Returns true if the device handler can send and receive data. */

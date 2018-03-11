@@ -34,6 +34,7 @@ extension CanReceiveSessionData {
     
 }
 
+/** Is the intermediate between the application layer and the actual connection (i.e. TCP/Web sockets). Represents an interface to a host capable of interractions through JSONRequest objects. */
 public protocol ISocketSession {
     
     /** If set, the server will try to reconnect using this interval upon disconnection. */
@@ -56,12 +57,5 @@ public protocol ISocketSession {
     
     /** Sends the JSONConvertable data to host. `delegate` is called upon reply, but it's is optional since an imediate reply can't allways be expected from host. */
     func send(model: JSONRequest, delegate: InputStream.JsonDictonaryResponseType? )
-    
-}
-
-extension ISocketSession {
-    
-    /** Renders `delegate` optional. */
-    //public func send(model: JSONRequest, delegate: InputStream.JsonDictonaryResponseType? = nil) { send (model: model, delegate: nil) }
     
 }

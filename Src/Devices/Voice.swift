@@ -8,17 +8,21 @@
 
 import Foundation
 
+/** Implementations are capable of remote text transfer */
 public protocol IVoice: IDevice {
     
     func say(text: String)
     
 }
 
+/** RPC Bridge to remote speech synthesizer */
 public class Voice: DeviceBase, IVoice {
+    
+    let SayProperty = "Say"
     
     public func say(text: String) {
         
-        deviceRouter?.invoke(device: self, action: "Say", parameters: [text])
+        deviceRouter?.invoke(device: self, action: SayProperty, parameters: [text])
         
     }
     

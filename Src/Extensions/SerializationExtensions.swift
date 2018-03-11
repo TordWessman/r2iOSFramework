@@ -8,21 +8,26 @@
 
 import Foundation
 
-extension InputStream {
+/** Provides mechanisms for reading out data of a specified length or a JsonDictionaryType object.   */
+public extension InputStream {
     
     public typealias JsonDictionaryType = [String: Any]
     public typealias JsonDictonaryResponseType = ((InputStream.JsonDictionaryType?, Error?) -> ())
     
-    // Reads size bytes and deserializes inte a json object
+    /** Reads size bytes and deserializes inte a json object */
     func json (_ size: Int) throws -> JsonDictionaryType {
         
-        let dd = try JSONSerialization.jsonObject(with: read(size), options: JSONSerialization.ReadingOptions.mutableContainers)
+        guard let dd = try JSONSerialization.jsonObject(with: read(size), options: JSONSerialization.ReadingOptions.mutableContainers) as? JsonDictionaryType else {
+            
+            throw NetworkError.SerializationError("Object not of type 'JsonDictionaryType'.")
+            
+        }
         
-        return dd as! JsonDictionaryType
+        return dd
         
     }
     
-    // Reads count bytes and returns an allocated Data object
+    /** Reads count bytes and returns an allocated Data object */
     func read (_ count: Int) throws -> Data {
         
         let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: count)
@@ -40,6 +45,7 @@ extension InputStream {
             throw NetworkError.SerializationError("Stream reading error. Expected \(count) bytes. Got \(bytesRead).")
             
         }
+        
         let d = Data(bytes: buffer, count: count)
         
         let s = String(bytes: d, encoding: String.Encoding.utf8)
@@ -48,7 +54,7 @@ extension InputStream {
         
     }
     
-    // Reads and returns the type T
+    /** Reads and returns the type T assuming data is LSB-first structured. */
     func read<T> (_: T.Type) throws -> T {
         
         let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: MemoryLayout<T>.size)
@@ -66,10 +72,30 @@ extension InputStream {
     
 }
 
-extension Data {
+/** Provides mechanisms for serialization of value types into byte arrays. */
+internal extension Data {
     
-    // Transforms the value of type T into a raw byte array
-    static func serialize<T>(_ value: T, _ count: Int? = nil) -> [UInt8] {
+    static func serializeObject(_ jsonObject: InputStream.JsonDictionaryType) -> [UInt8]? {
+        
+        do {
+        
+            return try [UInt8](JSONSerialization.data(withJSONObject: jsonObject, options: JSONSerialization.WritingOptions()))
+            
+        } catch {
+            
+            print(error)
+            
+        }
+        
+        return nil
+        
+    }
+
+    /** Transforms the value of the primitive value type T into a raw byte array (LSB first).
+     This methods does not apply for complex objects.
+     
+     */
+    static func serializeValue<T>(_ value: T,  count: Int? = nil) -> [UInt8] {
         
         var value: T = value
         

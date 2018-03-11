@@ -12,11 +12,11 @@ public class DeviceFactory {
     
     private var m_deviceRouter: IDeviceRouter
     
-    init (deviceRouter : IDeviceRouter ) {
+    public init (deviceRouter : IDeviceRouter ) {
             m_deviceRouter = deviceRouter
     }
     
-    func CreateVoice(id: String) -> IVoice {
+    public func createVoice(id: String) -> IVoice {
     
         let voice = Voice(id: id, deviceRouter: m_deviceRouter)
         m_deviceRouter.get(device: voice)
@@ -24,7 +24,7 @@ public class DeviceFactory {
         
     }
     
-    func CreateInputPort(id: String) -> IInputPort {
+    public func createInputPort(id: String) -> IInputPort {
  
         let device = AnalogDevice<Bool>(id: id, deviceRouter: m_deviceRouter)
         m_deviceRouter.get(device: device)
@@ -34,7 +34,7 @@ public class DeviceFactory {
         
     }
     
-    func CreateOutputPort(id: String) -> AnalogDevice<Bool> {
+    public func createOutputPort(id: String) -> AnalogDevice<Bool> {
         
         let device = AnalogDevice<Bool>(id: id, deviceRouter: m_deviceRouter)
         m_deviceRouter.get(device: device)
@@ -42,7 +42,7 @@ public class DeviceFactory {
         
     }
     
-    func CreateSensor<T>(id: String) -> AnalogDevice<T> {
+    public func createSensor<T>(id: String) -> AnalogDevice<T> {
         
         let sensor = AnalogDevice<T>(id: id, deviceRouter: m_deviceRouter)
         m_deviceRouter.get(device: sensor)
@@ -50,20 +50,20 @@ public class DeviceFactory {
         
     }
     
-    func createConsole(id: String) -> IConsole {
+    public func createConsole(id: String) -> IConsole {
         let console = Console(id: id, deviceRouter: m_deviceRouter)
         //m_deviceRouter.
         return console
         
     }
     
-    func createRemoteLog(id: String) -> IRemoteLog {
+    public func createRemoteLog(id: String) -> IRemoteLog {
         
         return RemoteLog(id: id, deviceRouter: m_deviceRouter)
         
     }
     
-    func createServo(id: String) -> IServo {
+    public func createServo(id: String) -> IServo {
         
         let servo = Servo(id: id, deviceRouter: m_deviceRouter)
         return servo

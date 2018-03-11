@@ -16,11 +16,11 @@ public class UDPClient {
     private var m_serializer: PackageFactory!
     private var m_requestDelegates: [String: MessageDelegate]
     
-    init (port: UInt16, serializer: PackageFactory) {
+    public init (port: UInt16) {
         
         m_requestDelegates = [String: MessageDelegate]()
         m_connection = UDPBroadcastConnection(port: port, handler: responseReceived)
-        m_serializer = serializer
+        m_serializer = PackageFactory()
        
         
     }

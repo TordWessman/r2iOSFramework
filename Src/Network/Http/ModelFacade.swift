@@ -29,7 +29,7 @@ public class ModelFacade : IModelFacade {
     private var m_queue: OperationQueue
     private var m_requests: [String: IRequest]
     
-    func get<T>(params: JSONRequest) -> ModelRequest<T> {
+    public func get<T>(params: JSONRequest) -> ModelRequest<T> {
 
         let request: ModelRequest<T> = createRequest(params: params, method: HttpMethod.get)
         startOperation(request: request);
@@ -38,7 +38,7 @@ public class ModelFacade : IModelFacade {
         
     }
     
-    func post<T>(params: JSONRequest) -> ModelRequest<T> {
+    public func post<T>(params: JSONRequest) -> ModelRequest<T> {
         
         let request: ModelRequest<T> = createRequest(params: params, method: HttpMethod.post)
         startOperation(request: request);
@@ -46,7 +46,7 @@ public class ModelFacade : IModelFacade {
         
     }
     
-    func put<T>(params: JSONRequest) -> ModelRequest<T> {
+    public func put<T>(params: JSONRequest) -> ModelRequest<T> {
         
         let request: ModelRequest<T> = createRequest(params: params, method: HttpMethod.put)
         startOperation(request: request);
@@ -55,7 +55,7 @@ public class ModelFacade : IModelFacade {
     }
 
     
-    init (baseURL:String) {
+    public init (baseURL: String) {
         
         m_baseURL = baseURL;
         m_queue = OperationQueue()

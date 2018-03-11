@@ -10,9 +10,17 @@ import Foundation
 
 public struct TCPMessage {
     
-    var code: Int16
-    var payload: InputStream.JsonDictionaryType
-    var destination: String
-    var headers: InputStream.JsonDictionaryType
+    public var code: Int16
+    public var payload: InputStream.JsonDictionaryType
+    public var destination: String
+    public var headers: InputStream.JsonDictionaryType
+    
+    // Exposes the init method outside the framework
+    public init(code: Int16, payload: InputStream.JsonDictionaryType, destination: String, headers: InputStream.JsonDictionaryType) {
+        self.code = code
+        self.payload = payload
+        self.destination = destination
+        self.headers = headers
+    }
     
 }

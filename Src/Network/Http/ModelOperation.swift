@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum OperationStatus : Int {
+public enum OperationStatus : Int {
     case None = 0
     case Running = 50
     case Success = 200
@@ -17,7 +17,7 @@ enum OperationStatus : Int {
 
 public struct OperationFail {
     
-    private(set) var message: String?;
+    private(set) public var message: String?;
     
     init (message: String) {
         self.message = message;
@@ -57,12 +57,12 @@ public enum HttpMethod : String {
 *   The generic parameter T has the type of the input model
 *   The generic parameter K has the type of the output model
 */
-class ModelRequest<T :JSONInitializable> : ModelRequestExecutionInterface, IModelRequest  {
+public class ModelRequest<T :JSONInitializable> : ModelRequestExecutionInterface, IModelRequest  {
     
-    typealias ModelType = T
-    typealias OPERATION_DONE = ((ModelRequest) -> ())
-    typealias OPERATION_SUCCESS = (ModelType, [String:String]?) ->Void
-    typealias OPERATION_FAIL = (OperationFail) ->Void
+    public  typealias ModelType = T
+    public typealias OPERATION_DONE = ((ModelRequest) -> ())
+    public typealias OPERATION_SUCCESS = (ModelType, [String:String]?) ->Void
+    public typealias OPERATION_FAIL = (OperationFail) ->Void
     
     private var m_delegate: OPERATION_DONE
     private var m_method: HttpMethod
@@ -72,12 +72,12 @@ class ModelRequest<T :JSONInitializable> : ModelRequestExecutionInterface, IMode
     private var m_succesDelegate: OPERATION_SUCCESS?
     private var m_failDelegate: OPERATION_FAIL?
     
-    private(set) var status: OperationStatus = .None
+    private(set) public var status: OperationStatus = .None
     private(set) var json: [String:Any?]?
     
     private var m_httpRequest: HttpRequest?
     
-    private(set) var id: String
+    private(set) public var id: String
     
     func cancel () {
     
@@ -155,7 +155,7 @@ class ModelRequest<T :JSONInitializable> : ModelRequestExecutionInterface, IMode
     *   delegate: OPERATION_DONE delegate to be called after a (successful och failed) operation
     *   params: optional parameters of type T to be used as request input parameters
     */
-    init (url: String, method: HttpMethod, delegate:@escaping OPERATION_DONE, params: JSONConvertable? = nil ) {
+    public init (url: String, method: HttpMethod, delegate:@escaping OPERATION_DONE, params: JSONConvertable? = nil ) {
         
         m_delegate = delegate;
         m_method = method;
@@ -165,14 +165,14 @@ class ModelRequest<T :JSONInitializable> : ModelRequestExecutionInterface, IMode
         
     }
     
-     func success(delegate: @escaping OPERATION_SUCCESS) -> Self {
+     public func success(delegate: @escaping OPERATION_SUCCESS) -> Self {
         
         m_succesDelegate = delegate;
 
         return self;
     }
     
-    func fail(delegate: @escaping OPERATION_FAIL) -> Self {
+    public func fail(delegate: @escaping OPERATION_FAIL) -> Self {
         
         m_failDelegate = delegate;
         

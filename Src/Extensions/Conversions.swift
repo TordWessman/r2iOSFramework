@@ -21,9 +21,6 @@ public protocol StringConvertable {
 }
 
 public protocol AsString: StringInitalizable, StringConvertable {
-
-    
-   
     
 }
 

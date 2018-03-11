@@ -8,17 +8,22 @@
 
 import Foundation
 
+/** Allows remote playback. */
 public protocol IMusicPlayer: IDevice {
     
+    /** Initiates playback of a resource named `song`. */
     func play(song: String)
     
 }
 
+/** RPC bridge to remote music player. */
 public class MusicPlayer: DeviceBase, IMusicPlayer {
+    
+    let PlayCommand = "Play"
     
     public func play(song: String) {
         
-        deviceRouter?.invoke(device: self, action: "Play", parameters: [song])
+        deviceRouter?.invoke(device: self, action: PlayCommand, parameters: [song], delegate: nil)
         
     }
     

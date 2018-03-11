@@ -8,12 +8,12 @@
 
 import Foundation
 
-/*! Convenience base class for devices. Helps with common functionality. */
+/** Convenience base class for RPC devices. Helps with common functionality. */
 public class DeviceBase: IDevice {
     
     public typealias DEVICE_CHANGED = (IDevice) -> ()
     
-    static let Value = "Value"
+    public static let Value = "Value"
     
     private(set) public var id: String
     private(set) var deviceRouter: IDeviceRouter?
@@ -68,9 +68,9 @@ public class DeviceBase: IDevice {
         
         DispatchQueue.global(qos: .background).async { [weak self] in
 
-            guard self != nil else { return; }
+            guard let strongSelf = self else { return }
             
-             self!.m_listeners.forEach {$0(self!)}
+             strongSelf.m_listeners.forEach {$0(self!)}
             
         }
 

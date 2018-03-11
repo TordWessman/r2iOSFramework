@@ -9,11 +9,17 @@
 import Foundation
 
 public class DeviceRouter: CanReceiveSessionData, IDeviceRouter {
+    
     public func onSessionError(session: ISocketSession, error: Error?) {
         
+        Log.d("\(String(describing: error)) for connection: \(session.address)", .error)
+    
     }
     
+    // Connection to the remote host
     private var m_session: ISocketSession
+    
+    // List of all devices connected. <Device identifier: Device representation>
     private var m_devices: [String: IDevice]
     
     public var ready: Bool { return m_session.isConnected }
@@ -49,7 +55,7 @@ public class DeviceRouter: CanReceiveSessionData, IDeviceRouter {
         request.action = propertyName
         request.addParam(value: value)
         
-        m_session.send(model: request) { (response, error) in
+        let _ = m_session.send(model: request) { (response, error) in
             
             delegate?(response, error)
             
@@ -97,7 +103,7 @@ public class DeviceRouter: CanReceiveSessionData, IDeviceRouter {
         
         request.type = .get
         
-        m_session.send(model: request) { (response, error) in
+        let _ = m_session.send(model: request) { (response, error) in
             
             delegate?(response, error)
             

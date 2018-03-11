@@ -29,7 +29,7 @@ extension CanReceiveSessionData {
     
     public func onSessionReceive(session: ISocketSession, response: InputStream.JsonDictionaryType) {}
     public func onSessionConnect(session: ISocketSession) { Log.d ("Connected: " + session.address) }
-    public func onSessionDisconnect(session: ISocketSession) { Log.d ("Disconnected: " + session.address)  }
+    public func onSessionDisconnect(session: ISocketSession) { Log.d("Disconnected from \(session.address).")  }
     public func onSessionError(session: ISocketSession, error: Error?) {Log.d ("Error: " + session.address + ". Description: " + (error?.localizedDescription ?? "[none]" )) }
     
 }
@@ -45,8 +45,8 @@ public protocol ISocketSession {
     /** Returns true if connection is established to host. */
     var isConnected: Bool { get }
 
-    /** Connects to host using the specified parameters. */
-    func connect()
+    /** Connects to host using the specified parameters. The delegate method will be called with "true" if connection was successfull and "false" otherwise. */
+    func connect(_ delegate: ((Bool) -> ())?)
     
     /** Disconnect from host. */
     func disconnect()
@@ -55,7 +55,7 @@ public protocol ISocketSession {
     func addObserver(observer: CanReceiveSessionData)
     
     /** Sends the JSONConvertable data to host. `delegate` is called upon reply, but it's is optional since an imediate reply can't allways be expected from host. */
-    func send(model: JSONRequest, delegate: InputStream.JsonDictonaryResponseType? ) -> Bool
+    func send(model: JSONRequest, delegate: InputStream.JsonDictonaryResponseType? )
     
 }
 

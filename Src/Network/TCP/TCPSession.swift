@@ -36,9 +36,27 @@ public class TCPSession: ISocketSession {
         
     }
     
-    public func connect() {
+    public func connect(_ delegate: ((Bool) -> ())? = nil) {
 
+        m_client.onClose = { [weak self] (client) in
+        
+            guard let this = self else { return }
+            
+            this.m_observers.forEach({ (observer) in observer.onSessionDisconnect(session: this) })
+            
+        }
+        
+        m_client.onError = { [weak self] (client, error) in
+            
+            guard let this = self else { return }
+            
+            this.m_observers.forEach({ (observer) in observer.onSessionError(session: this, error: error) })
+            
+        }
+        
         m_client.connect { [weak self] (success, error) in
+            
+            delegate?(success)
             
             if (!success) {
                 
@@ -63,68 +81,60 @@ public class TCPSession: ISocketSession {
         
     }
 
-    public func send(model: JSONRequest, delegate: InputStream.JsonDictonaryResponseType?) -> Bool {
+    public func send(model: JSONRequest, delegate: InputStream.JsonDictonaryResponseType?) {
     
         let requestMessage = TCPMessage(code: 0, payload: model.json as InputStream.JsonDictionaryType, destination: model.url, headers: model.headers as InputStream.JsonDictionaryType)
         
-        guard let requestData =  m_serializer.serialize(message:  requestMessage) else {
-        
-            Log.d("Unable to serialize message for destination: \(model.url)")
-            return false
-            
-        }
-        
-        if (m_client.isReady) {
-            
-            return m_client.send(data: requestData, delegate: { [weak self] (responseData, error) in
-                
-                guard error == nil else {
-                    
-                    delegate?(nil, error)
-                    self?.m_observers.forEach({ (observer) in observer.onSessionError(session: self!, error: error) })
-                    
-                    return
-                }
-                guard let responseData = responseData else {
-                    
-                    let error = NetworkError.NoDataError("TCPSession send error: no data received. \(requestMessage.destination)")
-                    delegate?(nil, error)
-                    self?.m_observers.forEach({ (observer) in observer.onSessionError(session: self!, error: error) })
-                    
-                    return
-                }
-                
-                guard let responseMessage = self?.m_serializer.deserailize(data: responseData) else {
-                    
-                    let error = NetworkError.SerializationError("TCPSession send error: Unable to deserialize response. \(requestMessage.destination)")
-                    delegate?(nil, error)
-                    self?.m_observers.forEach({ (observer) in observer.onSessionError(session: self!, error: error) })
-                    
-                    return
-                    
-                }
-                
-                guard responseMessage.code == 200 else {
-                    
-                    let error = NetworkError.ResponseError("Bad response code: \(responseMessage.code) payload: \(String(describing: responseMessage.payload))")
-                    delegate?(nil, error)
-                    self?.m_observers.forEach({ (observer) in observer.onSessionError(session: self!, error: error) })
-                    
-                    return
-                    
-                }
-                
-                Log.d("Got response from \(self?.m_client.host ?? ""). Data: \(responseMessage.payload)")
-                self?.m_observers.forEach({ (observer) in observer.onSessionReceive(session: self!, response: responseMessage.payload) })
-                
-                delegate?(responseMessage.payload, nil)
+        guard let requestData =  m_serializer.serialize(message:  requestMessage) else { return assertionFailure("Unable to serialize message for destination: \(model.url)") }
 
-            })
-        }
+        guard m_client.isReady else { return assertionFailure("Unable to send message to destination: \(model.url). Client: \(m_client.description)") }
+
+        m_client.send(data: requestData, delegate: { [weak self] (responseData, error) in
             
-        Log.d ( Log.d("Unable to send message to destination: \(model.url). Connection not ready."))
-        
-        return false
+            guard let this = self else { return assertionFailure("TCPSession was deallocated.") }
+            guard error == nil else {
+                
+                delegate?(nil, error)
+                this.m_observers.forEach({ (observer) in observer.onSessionError(session: this, error: error) })
+                
+                return
+            }
+            guard let responseData = responseData else {
+                
+                let error = NetworkError.NoDataError("TCPSession send error: no data received. \(requestMessage.destination)")
+                delegate?(nil, error)
+                this.m_observers.forEach({ (observer) in observer.onSessionError(session: this, error: error) })
+                
+                return
+            }
+            
+            guard let responseMessage = self?.m_serializer.deserailize(data: responseData) else {
+                
+                let error = NetworkError.SerializationError("TCPSession send error: Unable to deserialize response. \(requestMessage.destination)")
+                delegate?(nil, error)
+                this.m_observers.forEach({ (observer) in observer.onSessionError(session: this, error: error) })
+                
+                return
+                
+            }
+            
+            guard responseMessage.code == 200 else {
+                
+                let error = NetworkError.ResponseError("Bad response code: \(responseMessage.code) payload: \(String(describing: responseMessage.payload))")
+                delegate?(nil, error)
+                this.m_observers.forEach({ (observer) in observer.onSessionError(session: this, error: error) })
+                
+                return
+                
+            }
+            
+            Log.d("Got response from \(self?.m_client.host ?? ""). Data: \(responseMessage.payload)")
+            this.m_observers.forEach({ (observer) in observer.onSessionReceive(session: this, response: responseMessage.payload) })
+            
+            delegate?(responseMessage.payload, nil)
+
+        })
+
         
     }
     
